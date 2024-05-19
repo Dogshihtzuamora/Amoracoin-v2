@@ -1,34 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erro 404 - Página não encontrada</title>
+    <link rel="icon" href="https://amoracoin.netlify.app/amoracoin-icon.png" type="image/png">
+    <title>Amoracoin - Página não encontrada</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: #fff;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             text-align: center;
         }
+
         .container {
-            margin-top: 100px;
+            max-width: 800px;
+            padding: 40px;
         }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e91e63;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 5px;
+        }
+
         h1 {
-            font-size: 36px;
+            font-size: 48px;
+            margin-bottom: 20px;
         }
+
         p {
             font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .button {
+            background-color: #e91e63;
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #c2185b;
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Erro 404 - Página não encontrada</h1>
-        <p>A página que você está procurando não foi encontrada.</p>
-        <p><a href="https://amoracoin.netlify.app">Voltar para a página inicial</a></p>
+        <div class="logo">
+            <img src="https://amoracoin.netlify.app/amoracoin-icon.png" alt="Amoracoin"> Amoracoin
+        </div>
+        <h1>Oops! Página não encontrada.</h1>
+        <p>A página que você está tentando acessar não existe ou foi movida.</p>
+        <a href="/" class="button">Voltar para a página inicial</a>
     </div>
 </body>
 </html>
