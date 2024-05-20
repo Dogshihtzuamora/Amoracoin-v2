@@ -9,21 +9,12 @@
      
 function redirectToAmoracoin() {
   const currentUrl = window.location.href;
-  const allowedUrls = [
-    "https://amoracoin.netlify.app/Carteira.html",
-    "https://amoracoin.vercel.app/Carteira"
-  ];
+  const expectedUrl = "https://amoracoin.netlify.app/Carteira";
 
-  let isAllowed = false;
-  for (let i = 0; i < allowedUrls.length; i++) {
-    if (currentUrl.startsWith(allowedUrls[i])) {
-      isAllowed = true;
-      break;
-    }
-  }
-
-  if (!isAllowed) {
-    window.location.replace("https://prot-code.vercel.app/biblioteca/acesso_negado.html");
+  if (currentUrl === expectedUrl) {  
+    // Faz algo caso a URL atual seja a esperada
+  } else {  
+    window.location.replace("https://prot-code.vercel.app/biblioteca/acesoo_negado.html");
   }
 }
 
