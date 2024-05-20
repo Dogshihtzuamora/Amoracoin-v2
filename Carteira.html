@@ -2,26 +2,32 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Títgina</title>
+    <title>Título da pgina</title>
 </head>
 <body>
     <script>
      
-     function redirectToAmoracoin() {
+function redirectToAmoracoin() {
   const currentUrl = window.location.href;
   const allowedUrls = [
     "https://amoracoin.netlify.app/Carteira",
     "https://amoracoin.vercel.app/Carteira"
   ];
 
-  if (allowedUrls.includes(currentUrl)) {    
-  } else {  
-    window.location.replace("https://prot-code.vercel.app/biblioteca/acesoo_negado.html");
+  let isAllowed = false;
+  for (let i = 0; i < allowedUrls.length; i++) {
+    if (currentUrl.startsWith(allowedUrls[i])) {
+      isAllowed = true;
+      break;
+    }
+  }
+
+  if (!isAllowed) {
+    window.location.replace("https://prot-code.vercel.app/biblioteca/acesso_negado.html");
   }
 }
 
 redirectToAmoracoin();
-
 
     </script>
 </body>
