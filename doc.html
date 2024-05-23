@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentação do Sistema Amoracoin</title>
+   <link rel="icon" href="https://amoracoin.netlify.app/amoracoin-icon.png" type="image/png"><meta property="og:title" content="Amoracoin">  <meta property="og:description" content="Documentação detalhada do sistema Amoracoin, uma moeda digital inovadora que facilita transações online sem depender de dinheiro convencional. Aprenda a utilizar os principais recursos e métodos da biblioteca Amoracoin."><meta name="theme-color" content="#ff407e"><meta name="robots" content="index, follow"><meta name="keywords" content="biblioteca, documentação, criptomoeda, finanças, transações, segurança, investimento, amoracoin"><meta name="author" content="Amoracoin"><meta name="author-keywords" content="desenvolvedor web, finanças, criptomoeda, amoracoin"><meta name="copyright" content="Copyright © 2024 by Amoracoin">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.highlightAll();
+    });
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: #333;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Documentação do Sistema Amoracoin</h1>
+
+<h2>Introdução</h2>
+<p>Amoracoin é um sistema de moeda digital inovador, desenvolvido por Ravy Novais Sales em 24/12/2023, projetado para facilitar trocas online sem depender de dinheiro convencional. Diferentemente de muitas criptomoedas, a Amoracoin adota uma abordagem única que não se baseia em tecnologia blockchain. Esta moeda digital oferece uma alternativa eficiente e simplificada para transações online, promovendo uma adoção mais ampla de moedas digitais em diferentes setores.</p>
+
+<p>O modelo da Amoracoin permite transações rápidas e seguras, com custos reduzidos, utilizando um sistema inovador baseado em um registro centralizado seguro para gerenciar transações e saldos de contas. Isso garante a integridade dos dados e a segurança das transações, eliminando a dependência do dinheiro físico e abrindo as portas para transações online sem barreiras.</p>
+
+<p>As principais funcionalidades da biblioteca Amoracoin incluem <code>login</code>, <code>criarConta</code>, <code>saldo</code>, <code>Minerar</code>, <code>transferirAmoracoin</code> e outras funcionalidades essenciais para interagir com o sistema.</p>
+  
+  <h2>Aviso</h2>
+<p>O sistema Amoracoin ainda está em fase de teste e desenvolvimento. As informações aqui apresentadas podem sofrer alterações à medida que o projeto evolui.</p>
+
+  
+  <h2>Requisitos para Utilizar o Sistema Amoracoin</h2>
+
+  <p>
+  Para usar o sistema Amoracoin, é necessário incluir as seguintes bibliotecas:
+  <pre>&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-app.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-auth.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-armz.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;amoracoin.js&quot;&gt;&lt;/script&gt;</pre>
+  Após incluir essas bibliotecas, você poderá utilizar os métodos descritos na documentação do sistema Amoracoin.
+</p>
+
+  <h2>Métodos</h2>
+
+  <h3>login</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Loga um usuário no sistema Amoracoin.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.login(email, senha)
+    .then(usuario => {
+      // Usuário logado com sucesso
+    })
+    .catch(erro => {
+      // Tratar erro de login
+    });</code></pre>
+
+  <h3>criarConta</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Cria uma nova conta de usuário no sistema Amoracoin.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.criarConta(email, senha, usuario)
+    .then(() => {
+      // Conta criada com sucesso
+    })
+    .catch(erro => {
+      // Tratar erro de criação de conta
+    });</code></pre>
+
+  <h3>logout</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Desconecta o usuário atualmente logado.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.logout()
+    .then(() => {
+      // Usuário desconectado com sucesso
+    })
+    .catch(erro => {
+      // Tratar erro de logout
+    });</code></pre>
+
+  <h3>obterNomeUsuario</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Recupera o nome de usuário do usuário atualmente logado.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.obterNomeUsuario()
+    .then(usuario => {
+      // Usar o nome de usuário
+      console.log(usuario)
+    })
+    .catch(erro => {
+      // Tratar erro ao buscar nome de usuário
+    });</code></pre>
+
+  <h3>saldo</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Recupera o saldo atual de Amoracoins para o usuário logado.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.saldo()
+    .then(saldo => {
+      // Usar o saldo
+    })
+    .catch(erro => {
+      // Tratar erro ao recuperar saldo
+    });</code></pre>
+
+  <h3>Minerar</h3>
+  <ul>
+    <li><strong>Propósito</strong>Minerar o terreno para ganhar os Amoracoins</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.Minerar()
+    .then(mineracaoBemSucedida => {
+      if (mineracaoBemSucedida) {
+        // Mineração bem-sucedida
+      } else {
+        // Mineração sem sucesso
+      }
+    })
+    .catch(erro => {
+      // Tratar erro de mineração
+    });</code></pre>
+
+  <h3>obterChave</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Recupera a chave de transferência para o usuário logado.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.obterChave()
+    .then(chaveTransferencia => {
+      // Usar a chave de transferência
+    })
+    .catch(erro => {
+      // Tratar erro ao recuperar a chave de transferência
+    });</code></pre>
+
+  <h3>Autenticacao</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Recupera o status de autenticação atual do usuário e as informações do usuário.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.Autenticacao()
+    .then(dadosUsuario => {
+      const { username, balance, transferKey } = dadosUsuario;
+      // Usar os dados do usuário
+    })
+    .catch(erro => {
+      // Tratar erro de autenticação
+    });</code></pre>
+
+  <h3>transferirAmoracoin</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Transfere Amoracoins do usuário atual para outro usuário.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.transferirAmoracoin(valor, chaveDestinatario, chaveRemetente);</code></pre>
+
+  <h3>obterHistoricoTransacoes</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Recupera o histórico de transações para o usuário atual.</li>
+    <li><strong>Uso</strong>:</li>
+  </ul>
+  <pre><code class="javascript">Amoracoin.obterHistoricoTransacoes()
+    .then(transacoes => {
+      // Usar o histórico de transações
+    })
+    .catch(erro => {
+      // Tratar erro ao recuperar histórico de transações
+    });</code></pre>
+
+  <h3>excluirConta</h3>
+  <ul>
+    <li><strong>Propósito</strong>: Exclui a conta do usuário atual e os dados associados.</li>    
+  <li><strong>Uso</strong>:</li>
+</ul>
+<pre><code class="javascript">Amoracoin.excluirConta()
+  .then(() => {
+    // Conta excluída com sucesso
+  })
+  .catch(erro => {
+    // Tratar erro ao excluir conta
+  });</code></pre>
+
+<h2>Conclusão</h2>
+<p>Esta documentação cobre os métodos essenciais do sistema Amoracoin, permitindo gerenciamento de usuário, transações, mineração e exclusão de conta.</p>
+
+<h2>Notas</h2>
+<ul>
+  <li>Certifique-se de que a Biblioteca esteja corretamente inicializado com a função <code>Amoracoin.inicializar()</code> antes de utilizar quaisquer outros métodos.</li>
+  <li>Trate os erros adequadamente nas rejeições de promessas para proporcionar uma boa experiência ao usuário.</li>
+</ul>
+
+<p>Esta documentação deve fornecer um guia abrangente para utilizar o sistema Amoracoin de forma eficaz.</p>
+
+</body>
+    </html>
