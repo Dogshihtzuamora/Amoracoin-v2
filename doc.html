@@ -57,7 +57,7 @@
   <pre>&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-app.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-auth.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-armz.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;amoracoin.js&quot;&gt;&lt;/script&gt;</pre>
+&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/Biblioteca/Amoracoin-3.0/Amoracoin.js&quot;&gt;&lt;/script&gt;</pre>
   Após incluir essas bibliotecas, você poderá utilizar os métodos descritos na documentação do sistema Amoracoin.
 </p>
 
@@ -165,19 +165,36 @@
     <li><strong>Uso</strong>:</li>
   </ul>
   <pre><code class="javascript">Amoracoin.Autenticacao()
-    .then(dadosUsuario => {
-      const { username, balance, transferKey } = dadosUsuario;
-      // Usar os dados do usuário
+    .then((userData) => {        
+        // Aqui você pode usar os dados do usuário
+        const { usuario, saldo, chaveTransferencia } = userData;
+        console.log(`Usuário: ${usuario}, Saldo: ${saldo}, Chave de Transferência: ${chaveTransferencia}`);
     })
-    .catch(erro => {
-      // Tratar erro de autenticação
+    .catch((error) => {
+        console.error("Erro ao autenticar usuário:", error);
+        // Trate o erro de acordo com a sua aplicação
     });</code></pre>
+    <h3>atualizarNomeUsuario</h3>
+<ul>
+  <li><strong>Propósito</strong>: Atualiza o nome de usuário do usuário atualmente logado.</li>
+  <li><strong>Uso</strong>:</li>
+</ul>
+<pre><code class="javascript">const novoNomeUsuario = "novonomeusuario";
+
+Amoracoin.atualizarNomeUsuario(novoNomeUsuario)
+  .then(() => {
+    alert('Nome de usuário atualizado com sucesso!');
+    // Atualizar a interface ou fazer outras operações necessárias
+  })
+  .catch((error) => {
+    alert('Erro ao atualizar nome de usuário: ' + error);
+  });</code></pre>
 
   <h3>transferirAmoracoin</h3>
   <ul>
     <li><strong>Propósito</strong>: Transfere Amoracoins do usuário atual para outro usuário.</li>
     <li><strong>Uso</strong>:</li>
-  </ul>
+  </ul>  
   <pre><code class="javascript">Amoracoin.transferirAmoracoin(valor, chaveDestinatario, chaveRemetente);</code></pre>
 
   <h3>obterHistoricoTransacoes</h3>
@@ -218,4 +235,4 @@
 <p>Esta documentação deve fornecer um guia abrangente para utilizar o sistema Amoracoin de forma eficaz.</p>
 
 </body>
-    </html>
+      </html>
