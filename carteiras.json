@@ -1,0 +1,8 @@
+[
+  {
+    "nome": "Amoracoin Carteira Oficial",
+    "foto": "https://amoracoin.netlify.app/amoracoin-icon.png",
+    "descricao": "Essa é a primeira carteira oficial, com funcionalidades como <strong>minerar</strong>, <strong>fazer transferências</strong> e <strong>gerar QR codes</strong>.<br>Com ela, é possível <em>minerar</em> e <em>fazer transferências</em>, além de contar com <strong>QR codes</strong> para facilitar.",
+    "link": "carteira.html"
+  } 
+]
