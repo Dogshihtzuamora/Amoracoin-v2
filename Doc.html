@@ -50,16 +50,21 @@
 <p>O sistema Amoracoin ainda está em fase de teste e desenvolvimento. As informações aqui apresentadas podem sofrer alterações à medida que o projeto evolui.</p>
 
   
-  <h2>Requisitos para Utilizar o Sistema Amoracoin</h2>
+ <h2>Requisitos para Utilizar o Sistema Amoracoin</h2>
 
-  <p>
-  Para usar o sistema Amoracoin, é necessário incluir as seguintes bibliotecas:
+  <p>Para usar o sistema Amoracoin, é necessário incluir as seguintes bibliotecas:</p>
+  <h3>Versão 3.0</h3>
   <pre>&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-app.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-auth.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-armz.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/Biblioteca/Amoracoin-3.0/Amoracoin.js&quot;&gt;&lt;/script&gt;</pre>
-  Após incluir essas bibliotecas, você poderá utilizar os métodos descritos na documentação do sistema Amoracoin.
-</p>
+
+  <h3>Versão 4.0</h3>
+  <pre>&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-app.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-auth.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-armz.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/Biblioteca/Amoracoin-4.0/Amoracoin.js&quot;&gt;&lt;/script&gt;</pre>
+  <p>Após incluir essas bibliotecas, você poderá utilizar os métodos descritos na documentação do sistema Amoracoin.</p>
 
   <h2>Métodos</h2>
 
@@ -222,6 +227,68 @@ Amoracoin.atualizarNomeUsuario(novoNomeUsuario)
   .catch(erro => {
     // Tratar erro ao excluir conta
   });</code></pre>
+  
+<h2>Métodos novos da versão 4.0</h2>
+
+<h3>TotalDeAmoracoin</h3>
+<ul>
+  <li><strong>Propósito</strong>: Recupera o total de Amoracoin existente.</li>
+  <li><strong>Uso</strong>:</li>
+</ul>
+<pre><code class="javascript">Amoracoin.TotalDeAmoracoin()
+    .then((total) => {
+        console.log("Total de Amoracoin existente:", total);
+    })
+    .catch((error) => {
+        console.error("Erro:", error);
+    });
+</code></pre>
+
+<h3>ChaveAnalisar</h3>
+<ul>
+  <li><strong>Propósito</strong>: Analisa uma chave de transferência e retorna o nome de usuário associado.</li>
+  <li><strong>Uso</strong>:</li>
+</ul>
+<pre><code class="javascript">const chave = 'chave_de_transferencia_aqui'; // Substitua pela chave desejada
+Amoracoin.ChaveAnalisar(chave)
+    .then((usuario) => {
+        console.log("Nome de usuário:", usuario);
+        alert("Nome de usuário: " + usuario); // Mostra o nome de usuário em um alerta
+    })
+    .catch((error) => {
+        console.error("Erro ao analisar a chave:", error);
+        alert("Erro ao analisar a chave: " + error);
+    });
+</code></pre>
+
+<h3>CongelarAmoracoins</h3>
+<ul>
+  <li><strong>Propósito</strong>: Congela um saldo específico de Amoracoin.</li>
+  <li><strong>Uso</strong>:</li>
+</ul>
+<pre><code class="javascript">Amoracoin.CongelarAmoracoins({
+    nome: "meu_saldo",
+    saldo: 100 // saldo a ser congelado
+});
+</code></pre>
+
+<h3>DescongelarAmoracoins</h3>
+<ul>
+  <li><strong>Propósito</strong>: Descongela um saldo específico de Amoracoin a partir de um arquivo.</li>
+  <li><strong>Uso</strong>:</li>
+</ul>
+<pre><code class="javascript">const arquivo = fileInput.files[0]; // Selecionar o arquivo desejado
+
+Amoracoin.DescongelarAmoracoins(arquivo)
+    .then(saldoRecuperado => {
+        console.log(`Saldo de Amoracoin recuperado: ${saldoRecuperado} AMCR`);
+        alert(`Saldo de Amoracoin recuperado: ${saldoRecuperado} AMCR`);
+    })
+    .catch(error => {
+        console.error("Erro ao descongelar arquivo:", error);
+        alert("Erro ao descongelar arquivo: " + error);
+    });
+</code></pre>      
 
 <h2>Conclusão</h2>
 <p>Esta documentação cobre os métodos essenciais do sistema Amoracoin, permitindo gerenciamento de usuário, transações, mineração e exclusão de conta.</p>
@@ -235,4 +302,4 @@ Amoracoin.atualizarNomeUsuario(novoNomeUsuario)
 <p>Esta documentação deve fornecer um guia abrangente para utilizar o sistema Amoracoin de forma eficaz.</p>
 
 </body>
-      </html>
+  </html>
