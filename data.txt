@@ -1,0 +1,175 @@
+<nm>1. Amoracoin.inicializar</nm>
+<inf>Inicializa o sistema Amoracoin, configurando os parâmetros necessários para o funcionamento do sistema, como autenticação e URLs de conexão.</inf>
+<code>
+Amoracoin.inicializar();
+</code>
+<fim>
+
+<nm>2. Amoracoin.criarConta</nm>
+<inf>Cria uma conta de usuário com e-mail, senha e nome de usuário. Também verifica se o nome de usuário já existe antes de criar a conta.</inf>
+<inf>Parâmetros:</inf>
+<lis>email (string): E-mail do usuário.</lis>
+<lis>senha (string): Senha do usuário.</lis>
+<lis>username (string): Nome de usuário que será associado à conta.</lis>
+<code>
+Amoracoin.criarConta()
+  .then(() => console.log("Conta criada com sucesso"))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>3. Amoracoin.login</nm>
+<inf>Realiza o login de um usuário com e-mail e senha, armazenando o token de autenticação localmente.</inf>
+<inf>Parâmetros:</inf>
+<lis>email (string): E-mail do usuário.</lis>
+<lis>senha (string): Senha do usuário.</lis>
+<code>
+Amoracoin.login()
+  .then(() => console.log("Login realizado com sucesso"))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>4. Amoracoin.saldo</nm>
+<inf>Retorna o saldo atual do usuário autenticado. Lança um erro caso o usuário não esteja autenticado ou o saldo não seja encontrado.</inf>
+<code>
+Amoracoin.saldo()
+  .then(saldo => console.log(`Saldo atual: ${saldo}`))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>5. Amoracoin.MinhaChave</nm>
+<inf>Retorna a chave de transferência do usuário autenticado.</inf>
+<code>
+Amoracoin.MinhaChave()
+  .then(chave => console.log(`Sua chave de transferência: ${chave}`))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>6. Amoracoin.AnalisarChave</nm>
+<inf>Verifica a chave de transferência fornecida e retorna o nome do usuário associado a ela.</inf>
+<inf>Parâmetros:</inf>
+<lis>chave (string): Chave de transferência a ser analisada.</lis>
+<code>
+Amoracoin.AnalisarChave()
+  .then(usuario => console.log(`Chave pertence ao usuário: ${usuario}`))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>7. Amoracoin.transferir</nm>
+<inf>Realiza a transferência de um valor para outro usuário usando chaves de transferência. Verifica saldo suficiente e autenticação.</inf>
+<inf>Parâmetros:</inf>
+<lis>valor (número): Valor a ser transferido.</lis>
+<lis>chaveDestinatario (string): Chave de transferência do destinatário.</lis>
+<lis>chaveRemetente (string): Chave de transferência do remetente (autenticado).</lis>
+<code>
+Amoracoin.transferir()
+  .then(() => console.log("Transferência realizada com sucesso"))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>8. Amoracoin.obterHistoricoTransacoes</nm>
+<inf>Retorna o histórico de transações do usuário autenticado.</inf>
+<code>
+Amoracoin.obterHistoricoTransacoes()
+  .then(historico => console.log(historico))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>9. Amoracoin.logout</nm>
+<inf>Realiza o logout do usuário, removendo todos os dados locais relacionados à autenticação.</inf>
+<code>
+Amoracoin.logout();
+console.log("Logout realizado com sucesso");
+</code>
+<fim>
+
+<nm>10. Amoracoin.TotalDeAmoracoin</nm>
+<inf>Retorna o total de Amoracoins existentes no sistema.</inf>
+<code>
+Amoracoin.TotalDeAmoracoin()
+  .then(total => console.log(`Total de Amoracoins: ${total}`))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>11. Amoracoin.excluirConta</nm>
+<inf>Exclui a conta do usuário autenticado, transferindo o saldo de volta ao sistema e removendo o usuário do banco de dados.</inf>
+<inf>Parâmetros:</inf>
+<lis>email (string): E-mail do usuário.</lis>
+<lis>senha (string): Senha do usuário.</lis>
+<code>
+Amoracoin.excluirConta()
+  .then(() => console.log("Conta excluída com sucesso"))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>12. Amoracoin.minerar</nm>
+<inf>Permite ao usuário minerar Amoracoins, adicionando 1 unidade ao saldo caso a mineração seja bem-sucedida.</inf>
+<code>
+Amoracoin.minerar()
+  .then(resultado => console.log(resultado ? "Mineração bem-sucedida!" : "Nenhum Amoracoin encontrado"))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>13. Amoracoin.CongelarAmoracoins</nm>
+<inf>Congela uma quantidade de Amoracoins do saldo do usuário. Gera um arquivo .amcr com os detalhes do congelamento.</inf>
+<inf>Parâmetros:</inf>
+<lis>nome (string): Nome do arquivo gerado.</lis>
+<lis>saldo (número): Quantidade de Amoracoins a serem congelados.</lis>
+<code>
+Amoracoin.CongelarAmoracoins()
+  .then(res => console.log(res.message))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>14. Amoracoin.DescongelarAmoracoins</nm>
+<inf>Descongela Amoracoins utilizando um arquivo gerado anteriormente.</inf>
+<inf>Parâmetros:</inf>
+<lis>arquivo (string): Conteúdo do arquivo .amcr.</lis>
+<code>
+Amoracoin.DescongelarAmoracoins()
+  .then(valor => console.log(`Amoracoins descongelados: ${valor}`))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>15. Amoracoin.alterarNome</nm>
+<inf>Altera o nome de usuário do usuário autenticado, verificando se o novo nome está disponível.</inf>
+<inf>Parâmetros:</inf>
+<lis>novoUsername (string): Novo nome de usuário.</lis>
+<code>
+Amoracoin.alterarNome()
+  .then(novoNome => console.log(`Nome alterado para: ${novoNome}`))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>16. Amoracoin.alterarSenha</nm>
+<inf>Altera a senha do usuário autenticado.</inf>
+<inf>Parâmetros:</inf>
+<lis>senhaAntiga (string): Senha atual do usuário.</lis>
+<lis>novaSenha (string): Nova senha desejada.</lis>
+<code>
+Amoracoin.alterarSenha()
+  .then(() => console.log("Senha alterada com sucesso"))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
+
+<nm>17. Amoracoin.UsersAmoracoin</nm>
+<inf>Retorna uma lista dos nomes de usuários registrados no sistema, ordenados pelo saldo em ordem decrescente.</inf>
+<code>
+Amoracoin.UsersAmoracoin()
+  .then(usuarios => console.log(`Usuários: ${usuarios}`))
+  .catch(err => console.error(err.message));
+</code>
+<fim>
