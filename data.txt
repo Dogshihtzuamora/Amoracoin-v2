@@ -1,3 +1,25 @@
+<n>Introdução</n>
+<info>
+    Amoracoin é um sistema de moeda digital inovador, desenvolvido por Ravy Novais Sales em 24/12/2023, projetado para facilitar trocas online sem depender de dinheiro convencional. Diferentemente de muitas criptomoedas, a Amoracoin adota uma abordagem única que não se baseia em tecnologia blockchain. Esta moeda digital oferece uma alternativa eficiente e simplificada para transações online, promovendo uma adoção mais ampla de moedas digitais em diferentes setores.
+
+    A biblioteca Amoracoin foi desenvolvida para facilitar a integração e a gestão das operações relacionadas a essa moeda digital em plataformas web. Com funções que permitem a autenticação de usuários, alteração de senhas, e visualização de informações detalhadas dos usuários na plataforma, a biblioteca proporciona uma experiência robusta e segura para os desenvolvedores que desejam implementar o sistema Amoracoin em seus projetos.
+</info>
+<fim>
+    
+    <n>Aviso sobre a Biblioteca</n>
+<info>
+    **IMPORTANTE**: Certifique-se de incluir a biblioteca corretamente em seu projeto antes de utilizar suas funções. Para começar, basta adicionar o código de inclusão e seguir as instruções de uso. Utilize as funções conforme a documentação para garantir a segurança e a eficiência de sua integração.
+
+    Aqui está um exemplo de como incluir a biblioteca no seu projeto:
+</info>
+<cdHtml>
+       <pre>
+&lt;script src=&quot;https://Amoracoin.vercel.app/lib/oi.js&quot;&gt;&lt;/script&gt;
+</pre>
+    
+</cdHtml>
+<fim>
+
 <n>1. Inicializar</n>
 <info>
 Inicializa a biblioteca <strong style="color: #007bff;">Amoracoin</strong>, configurando os parâmetros essenciais, como autenticação e URLs. Deve ser chamada obrigatoriamente antes de qualquer outra função da biblioteca.
@@ -278,3 +300,8 @@ Exemplo de Uso:
 }); 
 </cd> 
 <fim>
+    
+<n>Conclusão</n>
+<info>
+    Esta documentação cobre os métodos essenciais do sistema Amoracoin, permitindo gerenciamento de usuário, transações, mineração e exclusão de conta.
+</info>
