@@ -1,175 +1,280 @@
-<nm>1. Amoracoin.inicializar</nm>
-<inf>Inicializa o sistema Amoracoin, configurando os parâmetros necessários para o funcionamento do sistema, como autenticação e URLs de conexão.</inf>
-<code>
-Amoracoin.inicializar();
-</code>
+<n>1. Inicializar</n>
+<info>
+Inicializa a biblioteca <strong style="color: #007bff;">Amoracoin</strong>, configurando os parâmetros essenciais, como autenticação e URLs. Deve ser chamada obrigatoriamente antes de qualquer outra função da biblioteca.
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.inicializar()</code>
+</cd>
 <fim>
 
-<nm>2. Amoracoin.criarConta</nm>
-<inf>Cria uma conta de usuário com e-mail, senha e nome de usuário. Também verifica se o nome de usuário já existe antes de criar a conta.</inf>
-<inf>Parâmetros:</inf>
-<lis>email (string): E-mail do usuário.</lis>
-<lis>senha (string): Senha do usuário.</lis>
-<lis>username (string): Nome de usuário que será associado à conta.</lis>
-<code>
-Amoracoin.criarConta()
-  .then(() => console.log("Conta criada com sucesso"))
-  .catch(err => console.error(err.message));
-</code>
+<n>2. Criar Conta</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.criarConta(email, senha, username)</strong><br>
+Descrição: Cria uma nova conta de usuário com os dados fornecidos. Valida se o nome de usuário já está em uso e realiza a integração com o sistema de autenticação.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.criarConta("email@exemplo.com", "senha123", "usuarioNovo")</code><br>
+.then(() => {<br>
+    <code style="color: #007bff;">console.log("Conta criada com sucesso!");</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao criar conta:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>3. Amoracoin.login</nm>
-<inf>Realiza o login de um usuário com e-mail e senha, armazenando o token de autenticação localmente.</inf>
-<inf>Parâmetros:</inf>
-<lis>email (string): E-mail do usuário.</lis>
-<lis>senha (string): Senha do usuário.</lis>
-<code>
-Amoracoin.login()
-  .then(() => console.log("Login realizado com sucesso"))
-  .catch(err => console.error(err.message));
-</code>
+<n>3. Login</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.login(email, senha)</strong><br>
+Descrição: Autentica o usuário com as credenciais fornecidas, armazenando os dados necessários para operações futuras, como o token e a chave de transferência.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.login("email@exemplo.com", "senha123")</code><br>
+.then(() => {<br>
+    <code style="color: #007bff;">console.log("Login realizado com sucesso!");</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao fazer login:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>4. Amoracoin.saldo</nm>
-<inf>Retorna o saldo atual do usuário autenticado. Lança um erro caso o usuário não esteja autenticado ou o saldo não seja encontrado.</inf>
-<code>
-Amoracoin.saldo()
-  .then(saldo => console.log(`Saldo atual: ${saldo}`))
-  .catch(err => console.error(err.message));
-</code>
+<n>4. Saldo</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.saldo()</strong><br>
+Descrição: Retorna o saldo atual de Amoracoins do usuário autenticado. Requer que o usuário esteja logado.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.saldo()</code><br>
+.then(saldo => {<br>
+    <code style="color: #007bff;">console.log("Saldo disponível:", saldo);</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao consultar saldo:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>5. Amoracoin.MinhaChave</nm>
-<inf>Retorna a chave de transferência do usuário autenticado.</inf>
-<code>
-Amoracoin.MinhaChave()
-  .then(chave => console.log(`Sua chave de transferência: ${chave}`))
-  .catch(err => console.error(err.message));
-</code>
+<n>5. Analisar Chave</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.AnalisarChave(chave)</strong><br>
+Descrição: Verifica a chave de transferência fornecida e retorna o nome de usuário associado a ela, se encontrado.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.AnalisarChave("chaveExemplo123")</code><br>
+.then(username => {<br>
+    <code style="color: #007bff;">console.log("Usuário associado à chave:", username);</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao analisar chave:", error);</code><br>
+});
+</cd>
+<fim>
+    
+<n>6. Minha Chave</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.MinhaChave()</strong><br>
+Descrição: Recupera a chave de transferência associada à conta do usuário autenticado.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.MinhaChave()</code><br>
+.then(chave => {<br>
+    <code style="color: #007bff;">console.log("Minha chave de transferência:", chave);</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao obter minha chave:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>6. Amoracoin.AnalisarChave</nm>
-<inf>Verifica a chave de transferência fornecida e retorna o nome do usuário associado a ela.</inf>
-<inf>Parâmetros:</inf>
-<lis>chave (string): Chave de transferência a ser analisada.</lis>
-<code>
-Amoracoin.AnalisarChave()
-  .then(usuario => console.log(`Chave pertence ao usuário: ${usuario}`))
-  .catch(err => console.error(err.message));
-</code>
+<n>7. Transferir</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.transferir(valor, chaveDestinatario, chaveRemetente)</strong><br>
+Descrição: Realiza uma transferência de Amoracoins entre dois usuários, verificando o saldo e as chaves fornecidas.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.transferir(50, "chaveDestino123", "chaveOrigem456")</code><br>
+.then(() => {<br>
+    <code style="color: #007bff;">console.log("Transferência realizada com sucesso!");</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao transferir:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>7. Amoracoin.transferir</nm>
-<inf>Realiza a transferência de um valor para outro usuário usando chaves de transferência. Verifica saldo suficiente e autenticação.</inf>
-<inf>Parâmetros:</inf>
-<lis>valor (número): Valor a ser transferido.</lis>
-<lis>chaveDestinatario (string): Chave de transferência do destinatário.</lis>
-<lis>chaveRemetente (string): Chave de transferência do remetente (autenticado).</lis>
-<code>
-Amoracoin.transferir()
-  .then(() => console.log("Transferência realizada com sucesso"))
-  .catch(err => console.error(err.message));
-</code>
+<n>8. Obter Histórico de Transações</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.obterHistoricoTransacoes()</strong><br>
+Descrição: Retorna o histórico de transações do usuário autenticado, incluindo transferências enviadas e recebidas.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.obterHistoricoTransacoes()</code><br>
+.then(historico => {<br>
+    <code style="color: #007bff;">console.log("Histórico de transações:", historico);</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao obter histórico:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>8. Amoracoin.obterHistoricoTransacoes</nm>
-<inf>Retorna o histórico de transações do usuário autenticado.</inf>
-<code>
-Amoracoin.obterHistoricoTransacoes()
-  .then(historico => console.log(historico))
-  .catch(err => console.error(err.message));
-</code>
+<n>9. Logout</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.logout()</strong><br>
+Descrição: Remove os dados de autenticação do usuário, encerrando a sessão atual.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.logout()</code><br>
+.then(() => {<br>
+    <code style="color: #007bff;">console.log("Logout realizado com sucesso!");</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao fazer logout:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>9. Amoracoin.logout</nm>
-<inf>Realiza o logout do usuário, removendo todos os dados locais relacionados à autenticação.</inf>
-<code>
-Amoracoin.logout();
-console.log("Logout realizado com sucesso");
-</code>
+<n>10. Total de Amoracoins Existentes</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.TotalDeAmoracoin()</strong><br>
+Descrição: Retorna o total de Amoracoins disponíveis na plataforma.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.TotalDeAmoracoin()</code><br>
+.then(total => {<br>
+    <code style="color: #007bff;">console.log("Total de Amoracoins existentes:", total);</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao obter total de Amoracoins:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>10. Amoracoin.TotalDeAmoracoin</nm>
-<inf>Retorna o total de Amoracoins existentes no sistema.</inf>
-<code>
-Amoracoin.TotalDeAmoracoin()
-  .then(total => console.log(`Total de Amoracoins: ${total}`))
-  .catch(err => console.error(err.message));
-</code>
+<n>11. Excluir Conta</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.excluirConta(email, senha)</strong><br>
+Descrição: Exclui a conta do usuário autenticado, movendo o saldo de Amoracoins de volta ao total existente na plataforma.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.excluirConta("email@exemplo.com", "senha123")</code><br>
+.then(() => {<br>
+    <code style="color: #007bff;">console.log("Conta excluída com sucesso!");</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao excluir conta:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>11. Amoracoin.excluirConta</nm>
-<inf>Exclui a conta do usuário autenticado, transferindo o saldo de volta ao sistema e removendo o usuário do banco de dados.</inf>
-<inf>Parâmetros:</inf>
-<lis>email (string): E-mail do usuário.</lis>
-<lis>senha (string): Senha do usuário.</lis>
-<code>
-Amoracoin.excluirConta()
-  .then(() => console.log("Conta excluída com sucesso"))
-  .catch(err => console.error(err.message));
-</code>
+<n>12. Minerar</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.minerar()</strong><br>
+Descrição: Tenta minerar Amoracoins, baseado em probabilidade. Se bem-sucedido, o saldo do usuário será incrementado.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.minerar()</code><br>
+.then(sucesso => {<br>
+    <code style="color: #007bff;">console.log(sucesso ? "Amoracoin minerado!" : "Nenhum Amoracoin encontrado.");</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao minerar:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>12. Amoracoin.minerar</nm>
-<inf>Permite ao usuário minerar Amoracoins, adicionando 1 unidade ao saldo caso a mineração seja bem-sucedida.</inf>
-<code>
-Amoracoin.minerar()
-  .then(resultado => console.log(resultado ? "Mineração bem-sucedida!" : "Nenhum Amoracoin encontrado"))
-  .catch(err => console.error(err.message));
-</code>
+<n>13. Congelar Amoracoins</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.CongelarAmoracoins({ nome, saldo })</strong><br>
+Descrição: Congela uma quantidade de Amoracoins do saldo do usuário, gerando um arquivo que pode ser usado para descongelar no futuro.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.CongelarAmoracoins({ nome: "meuArquivo", saldo: 100 })</code><br>
+.then(result => {<br>
+    <code style="color: #007bff;">console.log("Amoracoins congelados com sucesso:", result);</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao congelar Amoracoins:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>13. Amoracoin.CongelarAmoracoins</nm>
-<inf>Congela uma quantidade de Amoracoins do saldo do usuário. Gera um arquivo .amcr com os detalhes do congelamento.</inf>
-<inf>Parâmetros:</inf>
-<lis>nome (string): Nome do arquivo gerado.</lis>
-<lis>saldo (número): Quantidade de Amoracoins a serem congelados.</lis>
-<code>
-Amoracoin.CongelarAmoracoins()
-  .then(res => console.log(res.message))
-  .catch(err => console.error(err.message));
-</code>
+<n>14. Descongelar Amoracoins</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.DescongelarAmoracoins(arquivo)</strong><br>
+Descrição: Descongela Amoracoins usando um arquivo gerado previamente pelo sistema.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.DescongelarAmoracoins(arquivo)</code><br>
+.then(valor => {<br>
+    <code style="color: #007bff;">console.log("Amoracoins descongelados:", valor);</code><br>
+})<br>
+.catch(error => {<br>
+    <code style="color: #d9534f;">console.error("Erro ao descongelar Amoracoins:", error);</code><br>
+});
+</cd>
 <fim>
 
-<nm>14. Amoracoin.DescongelarAmoracoins</nm>
-<inf>Descongela Amoracoins utilizando um arquivo gerado anteriormente.</inf>
-<inf>Parâmetros:</inf>
-<lis>arquivo (string): Conteúdo do arquivo .amcr.</lis>
-<code>
-Amoracoin.DescongelarAmoracoins()
-  .then(valor => console.log(`Amoracoins descongelados: ${valor}`))
-  .catch(err => console.error(err.message));
-</code>
+<n>15. Alterar Nome</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.alterarNome(novoUsername)</strong><br>
+Descrição: Atualiza o nome de usuário para o novo valor fornecido, verificando se já está em uso.
+Exemplo de Uso:
+</info>
+<cd>
+<span class="blue-text">Amoracoin.alterarNome("novoUsuario")</span>
+    .then(username => {
+        console.log("Nome atualizado com sucesso:", username);
+    })
+    .catch(error => {
+        console.error("Erro ao alterar nome:", error);
+    });
+</cd>
+<fim>
+   
+<n>16. Alterar Senha</n> 
+<info> 
+Nome da Função: <strong style="color: #007bff;">Amoracoin.alterarSenha(senhaAntiga, novaSenha)</strong><br> 
+Descrição: Altera a senha do usuário autenticado para um novo valor.<br> 
+Exemplo de Uso: 
+</info> 
+<cd> 
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.alterarSenha("senhaAtual", "novaSenha123")</code><br> 
+.then(() => {<br> 
+<code style="color: #007bff;">console.log("Senha alterada com sucesso!");</code><br> 
+})<br> 
+.catch(error => {<br> 
+<code style="color: #d9534f;">console.error("Erro ao alterar senha:", error);</code><br> 
+}); 
+</cd> 
 <fim>
 
-<nm>15. Amoracoin.alterarNome</nm>
-<inf>Altera o nome de usuário do usuário autenticado, verificando se o novo nome está disponível.</inf>
-<inf>Parâmetros:</inf>
-<lis>novoUsername (string): Novo nome de usuário.</lis>
-<code>
-Amoracoin.alterarNome()
-  .then(novoNome => console.log(`Nome alterado para: ${novoNome}`))
-  .catch(err => console.error(err.message));
-</code>
-<fim>
-
-<nm>16. Amoracoin.alterarSenha</nm>
-<inf>Altera a senha do usuário autenticado.</inf>
-<inf>Parâmetros:</inf>
-<lis>senhaAntiga (string): Senha atual do usuário.</lis>
-<lis>novaSenha (string): Nova senha desejada.</lis>
-<code>
-Amoracoin.alterarSenha()
-  .then(() => console.log("Senha alterada com sucesso"))
-  .catch(err => console.error(err.message));
-</code>
-<fim>
-
-<nm>17. Amoracoin.UsersAmoracoin</nm>
-<inf>Retorna uma lista dos nomes de usuários registrados no sistema, ordenados pelo saldo em ordem decrescente.</inf>
-<code>
-Amoracoin.UsersAmoracoin()
-  .then(usuarios => console.log(`Usuários: ${usuarios}`))
-  .catch(err => console.error(err.message));
-</code>
+<n>17. Usuários na Plataforma</n> 
+<info> 
+Nome da Função: <strong style="color: #007bff;">Amoracoin.UsersAmoracoin()</strong><br> 
+Descrição: Retorna uma lista de todos os usuários registrados na plataforma, ordenados pelo saldo em ordem decrescente. Essa função ajuda a visualizar os principais detentores de Amoracoins.<br> 
+Exemplo de Uso: 
+</info> 
+<cd> 
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.UsersAmoracoin()</code><br> 
+.then(usuarios => {<br> 
+<code style="color: #007bff;">console.log("Usuários na plataforma:", usuarios);</code><br> 
+})<br> 
+.catch(error => {<br> 
+<code style="color: #d9534f;">console.error("Erro ao obter usuários:", error);</code><br> 
+}); 
+</cd> 
 <fim>
