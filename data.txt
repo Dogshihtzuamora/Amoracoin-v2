@@ -300,6 +300,23 @@ Exemplo de Uso:
 }); 
 </cd> 
 <fim>
+
+<n>18. Obter Nome do Usuário</n>
+<info>
+Nome da Função: <strong style="color: #007bff;">Amoracoin.obterNomeUsuario()</strong><br>
+Descrição: Retorna o nome do usuário autenticado na plataforma.<br>
+Exemplo de Uso:
+</info>
+<cd>
+<code style="color: #28a745;"><span style="color: #007bff;">Amoracoin</span>.obterNomeUsuario()</code><br>
+.then(nomeUsuario => {
+<code style="color: #007bff;">console.log("Nome do Usuário:", nomeUsuario);</code><br>
+})<br>
+.catch(error => {<br>
+<code style="color: #d9534f;">console.error("Erro ao obter o nome do usuário:", error.message);</code><br>
+}); 
+</cd>
+<fim>
     
 <n>Conclusão</n>
 <info>
