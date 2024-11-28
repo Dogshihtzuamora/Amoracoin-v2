@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amoracoin Docs</title>
+   <title>Documentação do Sistema Amoracoin</title>
+     <link rel="icon" href="https://amoracoin.netlify.app/amoracoin-icon.png" type="image/png"><meta property="og:title" content="Amoracoin">  <meta property="og:description" content="Documentação detalhada do sistema Amoracoin, uma moeda digital inovadora que facilita transações online sem depender de dinheiro convencional. Aprenda a utilizar os principais recursos e métodos da biblioteca Amoracoin."><meta name="theme-color" content="#ff407e"><meta name="robots" content="index, follow"><meta name="keywords" content="biblioteca, documentação, criptomoeda, finanças, transações, segurança, investimento, amoracoin"><meta name="author" content="Amoracoin"><meta name="author-keywords" content="desenvolvedor web, finanças, criptomoeda, amoracoin"><meta name="copyright" content="Copyright © 2024 by Amoracoin">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/dark.min.css">
     <style>
@@ -280,9 +281,12 @@
             >
         </div>
 
-        <div class="content-area">
+        <div class="content-area">                        
+            
             <div class="content-grid" id="conteudo">
-                <!-- Conteúdo será carregado aqui -->
+               
+               
+               
             </div>
         </div>
 
@@ -337,17 +341,34 @@
         }
         
 function criarCard(bloco, index) {
-    const nome = bloco.match(/<n>(.*?)<\/n>/)[1].trim()
+    const nome = bloco.match(/<n>(.*?)<\/n>/)[1].trim();
     const info = bloco.match(/<info>(.*?)<\/info>/s);
     const codigo = bloco.match(/<cd>(.*?)<\/cd>/s);
-
+    const codigoHtml = bloco.match(/<cdHtml>(.*?)<\/cdHtml>/s);
     const card = document.createElement('div');
     card.classList.add('content-card');
     card.style.setProperty('--index', index);
-          
+
+    // Função para adicionar quebras de linha e colocar texto entre ** em negrito
+    const formatarInfo = (texto) => {
+        // Substitui quebras de linha por <br> e coloca texto entre ** em negrito
+        return texto
+            .replace(/\n/g, '<br>')  // Substitui as quebras de linha por <br>
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');  // Coloca texto entre ** em negrito
+    };
+
     card.innerHTML = `
         <h3>${nome}</h3>
-        ${info ? `<p>${info[1].trim()}</p>` : ''}
+        ${info ? `<p>${formatarInfo(info[1].trim())}</p>` : ''}
+        ${codigoHtml ? `
+            <div class="code-container">
+                <pre><code class="language-html">${codigoHtml[1].trim()}</code></pre>
+                <button class="copy-btn" onclick="copiarCodigo(this)">
+                    <i class="fas fa-copy"></i> Copiar Código
+                    <span class="copy-tooltip">Copiado!</span>
+                </button>
+            </div>
+        ` : ''}
         ${codigo ? `
             <div class="code-container">
                 <pre><code class="language-javascript">${codigo[1].trim()}</code></pre>
@@ -401,4 +422,4 @@ function criarCard(bloco, index) {
         })();
     </script>
 </body>
-    </html>
+        </html>
