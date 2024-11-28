@@ -1,200 +1,404 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Documentação do Sistema Amoracoin</title>
-   <link rel="icon" href="https://amoracoin.netlify.app/amoracoin-icon.png" type="image/png"><meta property="og:title" content="Amoracoin">  <meta property="og:description" content="Documentação detalhada do sistema Amoracoin, uma moeda digital inovadora que facilita transações online sem depender de dinheiro convencional. Aprenda a utilizar os principais recursos e métodos da biblioteca Amoracoin."><meta name="theme-color" content="#ff407e"><meta name="robots" content="index, follow"><meta name="keywords" content="biblioteca, documentação, criptomoeda, finanças, transações, segurança, investimento, amoracoin"><meta name="author" content="Amoracoin"><meta name="author-keywords" content="desenvolvedor web, finanças, criptomoeda, amoracoin"><meta name="copyright" content="Copyright © 2024 by Amoracoin">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-light.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Amoracoin Docs</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/dark.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4fc;
+        :root {
+            --primary-color: #8A4FFF;
+            --secondary-color: #5D3FD3;
+            --accent-color: #FF6B6B;
+            --bg-dark: #121212;
+            --bg-light: #1E1E1E;
+            --text-color: #E0E0E0;
+        }
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--bg-dark);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        h1 {
-            text-align: center;
-            color: #4a4a8c;
-        }
-        .search-bar {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .search-bar input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
-            font-size: 16px;
-        }
-        .search-bar button {
-            background-color: #4a4a8c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .search-bar button:hover {
-            background-color: #393975;
-        }
-        .example {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #f9f9fb;
-            border: 1px solid #e4e4f1;
-            border-radius: 10px;
             position: relative;
         }
-        .example h2 {
-            margin: 0 0 10px;
-            font-size: 20px;
-            color: #4a4a8c;
-        }
-        .example p {
-            margin: 0 0 10px;
-            color: #555;
-        }
-        pre {
-            background: #f4f4fc;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-size: 14px;
-        }
-        .copy-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #4a4a8c;
-            color: #fff;
+
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(138, 79, 255, 0.5);
+            z-index: 1100;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: rotate(180deg);
+            background-color: var(--secondary-color);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--bg-light);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-menu button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .content-area {
+            margin-top: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        #pesquisa {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px 20px 12px 40px;
+            background-color: var(--bg-light);
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: calc(50% - 320px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            z-index: 10;
+        }
+
+        #pesquisa:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(138, 79, 255, 0.5);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .content-card {
+            background-color: var(--bg-light);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg, 
+                transparent, 
+                var(--primary-color), 
+                transparent
+            );
+            transform: rotate(45deg);
+            opacity: 0.1;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(138, 79, 255, 0.2);
+        }
+
+        .content-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .copy-btn:hover {
+            background-color: #FF4E4E;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        .example:hover .copy-button {
-            opacity: 1;
+
+        pre {
+            background-color: #2c2c2c !important;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            position: relative;
         }
-        .copy-button:hover {
-            background: #45a049;
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
         }
-        .highlight {
-            background-color: #FFFACD;
-            border-left: 5px solid #FFD700;
-            padding: 10px;
+
+        .code-container {
+            position: relative;
         }
+
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-card {
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+            animation-delay: calc(var(--index) * 0.1s);
+        }
+        
+        
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Documentação Gerada</h1>
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Pesquisar por título...">
-            <button onclick="pesquisar()"><i class="fas fa-search"></i> Pesquisar</button>
-        </div>
-           <div class="example">
-               <h2>Introdução sobre a Biblioteca do Amoracoin </h2>
-                <p>Amoracoin é uma moeda digital criada por Ravy Novais Sales em 24/12/2023, que facilita trocas online sem usar dinheiro convencional. Ao contrário de outras criptomoedas, ela é descentralizada e não depende de tecnologia blockchain, oferecendo uma alternativa eficiente para transações digitais.</p>
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
 
-<p>O sistema Amoracoin permite transações rápidas, seguras e com custos baixos, utilizando um registro descentralizado para gerenciar saldos e transações de forma segura, sem a necessidade de dinheiro físico.</p>
-
-<p>As principais funcionalidades da Amoracoin incluem <code>login</code>, <code>criarConta</code>, <code>saldo</code>, <code>minerar</code>, <code>transferir</code> e outras para interagir com o sistema.</p>  
-  
-  <h2>Aviso</h2>
-<p>O sistema Amoracoin ainda está em fase de teste e desenvolvimento. As informações aqui apresentadas podem sofrer alterações à medida que o projeto evolui.</p>
-                       
-                    </div>
-                    
-                      <div class="example">
-                        <h2>Requisitos para Utilizar o Sistema Amoracoin</h2>
-
-  <p>Para usar o sistema Amoracoin, é necessário incluir a seguinte biblioteca:</p>
-    <pre><code class="html">&lt;script src=&quot;https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-auth.js&quot;&gt;&lt;/script&gt;</code></pre>
-    <button class="copy-button" onclick="copiarCodigo(this)"><i class="fas fa-copy"></i> Copiar</button>
-    <p>Após incluir essa biblioteca, você poderá utilizar os métodos descrito na documentação do sistema Amoracoin.</p>
-                             
-                    </div>
-        <div id="output"><h1>Métodos</h1></div>
-          <div class="example">
-                       <h2>Conclusão</h2>
-<p>Esta documentação cobre os métodos essenciais do sistema Amoracoin, permitindo gerenciamento de usuário, transações, mineração e exclusão de conta.</p>
-
-<p>Esta documentação deve fornecer um guia abrangente para utilizar o sistema Amoracoin de forma eficaz.</p>
-                       
-                    </div>
-        
-       <p>&copy; 2024 Amoracoin. Todos os direitos reservados.</p>
+    <div class="sidebar" id="sidebar">
+        <h2 style="color: var(--primary-color);">Amoracoin Menu</h2>
+        <ul class="sidebar-menu" id="menu">
+           
+        </ul>
     </div>
 
-    <script>       
-        async function carregarArquivo() {
-            const response = await fetch('data.txt'); 
-            const texto = await response.text();
-            const exemplos = texto.split('<fim>').filter(Boolean);
-            const output = document.getElementById('output');            
-            exemplos.forEach((exemplo) => {
-                const linhas = exemplo.trim().split('\n');
-                const nome = linhas.find(l => l.startsWith('<nm>')).replace('<nm>', '').trim();
-                
-                const infoInicio = linhas.indexOf('<inf>') + 1;
-                const codeInicio = linhas.indexOf('<code>') + 1;
-                const infoFim = codeInicio - 1;                
-                const info = linhas.slice(infoInicio, infoFim).join('\n').trim();
-                const codigo = linhas.slice(codeInicio).join('\n').trim();
-               
-                const infoHTML = info
-                    .replace(/<lis>(.*?)<\/lis>/g, '<li>$1</li>')
-                    .replace(/<neg>(.*?)<\/neg>/g, '<strong>$1</strong>');               
-                const exemploHTML = `
-                    <div class="example">
-                        <h2>${nome}</h2>
-                        <p>${infoHTML.replace(/\n/g, '<br>')}</p>
-                        <pre><code class="js">${codigo}</code></pre>
-                        <button class="copy-button" onclick="copiarCodigo(this)"><i class="fas fa-copy"></i> Copiar</button>
-                    </div>
-                `;
-                output.innerHTML += exemploHTML;
-            });          
+    <div class="app-container">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input 
+                type="text" 
+                id="pesquisa" 
+                placeholder="Pesquisar documentação"
+            >
+        </div>
+
+        <div class="content-area">
+            <div class="content-grid" id="conteudo">
+                <!-- Conteúdo será carregado aqui -->
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2024 Amoracoin. Todos os direitos reservados.
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+        async function carregarDados() {
+            try {
+                const response = await fetch('data.txt');
+                const data = await response.text();
+                return data.split('<fim>');
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                alert('Não foi possível carregar os dados. Verifique o arquivo data.txt');
+                return [];
+            }
+        }
+        function montarMenu(palavras) {
+            const menu = document.getElementById('menu');
+            const conteudo = document.getElementById('conteudo');
+            menu.innerHTML = '';
+            conteudo.innerHTML = '';
+
+            palavras.forEach((bloco, index) => {
+                const nome = bloco.match(/<n>(.*?)<\/n>/);
+                if (nome) {                    
+                    const li = document.createElement('li');
+                    const button = document.createElement('button');
+                    button.textContent = nome[1].trim();
+                    button.onclick = () => {
+                        mostrarApenasItem(bloco);
+                        toggleMenu();
+                    };
+                    li.appendChild(button);
+                    menu.appendChild(li);                    
+                    const card = criarCard(bloco, index);
+                    conteudo.appendChild(card);
+                }
+            });
+           
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightBlock(block);
             });
-        }        
-        function copiarCodigo(botao) {
-            const codigo = botao.previousElementSibling.textContent;
-            navigator.clipboard.writeText(codigo).then(() => {
-                alert('Código copiado para a área de transferência!');
+        }
+        
+function criarCard(bloco, index) {
+    const nome = bloco.match(/<n>(.*?)<\/n>/)[1].trim()
+    const info = bloco.match(/<info>(.*?)<\/info>/s);
+    const codigo = bloco.match(/<cd>(.*?)<\/cd>/s);
+
+    const card = document.createElement('div');
+    card.classList.add('content-card');
+    card.style.setProperty('--index', index);
+          
+    card.innerHTML = `
+        <h3>${nome}</h3>
+        ${info ? `<p>${info[1].trim()}</p>` : ''}
+        ${codigo ? `
+            <div class="code-container">
+                <pre><code class="language-javascript">${codigo[1].trim()}</code></pre>
+                <button class="copy-btn" onclick="copiarCodigo(this)">
+                    <i class="fas fa-copy"></i> Copiar Código
+                    <span class="copy-tooltip">Copiado!</span>
+                </button>
+            </div>
+        ` : ''}
+    `;
+    return card;
+}
+
+        function mostrarApenasItem(bloco) {
+            const conteudo = document.getElementById('conteudo');
+            conteudo.innerHTML = '';
+            const card = criarCard(bloco, 0);
+            conteudo.appendChild(card);                      
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
             });
-        }       
-        function pesquisar() {
-            const termo = document.getElementById('search').value.toLowerCase();
-            const exemplos = document.querySelectorAll('.example');
-            exemplos.forEach(exemplo => {
-                const titulo = exemplo.querySelector('h2').textContent.toLowerCase();
-                if (titulo.includes(termo)) {
-                    exemplo.style.display = 'block';
-                } else {
-                    exemplo.style.display = 'none';
-                }
-            });
-        }        
-        carregarArquivo();
+        }
+        function copiarCodigo(btn) {
+            const codeContainer = btn.closest('.code-container');
+            const code = codeContainer.querySelector('code');
+            const tooltip = btn.querySelector('.copy-tooltip');
+            const codigoTexto = code.textContent;                       
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codigoTexto;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);            
+            tooltip.style.opacity = '1';
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+            }, 2000);
+        }        document.getElementById('pesquisa').addEventListener('input', (e) => {
+    const filtro = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll('.content-card');
+    
+    cards.forEach(card => {
+        const titulo = card.querySelector('h3').textContent.toLowerCase(); 
+        card.style.display = titulo.includes(filtro) ? '' : 'none';
+    });
+});
+
+        (async () => {
+            const dados = await carregarDados();
+            montarMenu(dados);
+        })();
     </script>
 </body>
-      </html>
+    </html>
