@@ -14,7 +14,7 @@
 </info>
 <cdHtml>
        <pre>
-&lt;script src=&quot;https://Amoracoin.vercel.app/lib/oi.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://amoracoin.vercel.app/amoracoinCloud/sys/amoracoinjs/cloud/Biblioteca/Amoracoin-5.0/Amoracoin.js&quot;&gt;&lt;/script&gt;
 </pre>
     
 </cdHtml>
