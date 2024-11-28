@@ -1,1 +1,379 @@
-<!DOCTYPE html> <html lang="pt"> <head>     <meta charset="UTF-8">   <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Amoracoin Conta</title> </head> <body>    <link rel="preconnect" href="https://fonts.googleapis.com">     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">     <style>         :root {             --primary-color: #e91e63;             --secondary-color: #c2185b;             --bg-color: #f5f5f5;             --text-color: #333;         }          body {             font-family: 'Roboto', sans-serif;             background-color: var(--bg-color);             color: var(--text-color);             margin: 0;             padding: 0;             display: flex;             justify-content: center;             align-items: center;             height: 100vh;             perspective: 1000px;         }          .container {             max-width: 400px;             width: 100%;             padding: 40px;             background-color: #fff;             border-radius: 10px;             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);             animation: slideIn 0.5s ease;             transform-style: preserve-3d;         }          .section {             margin-bottom: 30px;             animation: flipIn 0.5s ease;         }          .section h2 {             color: var(--primary-color);             margin-top: 0;         }          .input-group {             margin-bottom: 20px;         }          .input-group label {             display: block;             color: #666;             font-size: 14px;             margin-bottom: 5px;         }          .input-group input {             width: 100%;             padding: 12px 16px;             font-size: 16px;             border: 2px solid #ccc;             border-radius: 6px;             transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;         }          .input-group input:focus {             outline: none;             border-color: var(--primary-color);             box-shadow: 0 0 8px rgba(233, 30, 99, 0.3);             transform: translateY(-2px);         }          .button {             background-color: var(--primary-color);             color: #fff;             padding: 12px 24px;             font-size: 16px;             border: none;             cursor: pointer;             border-radius: 6px;             transition: background-color 0.3s, transform 0.3s;             text-decoration: none;             display: block;             width: 100%;         }          .button:hover {             background-color: var(--secondary-color);             transform: translateY(-2px);         }          .main-section {             display: none;         }          .main-section p {             margin: 10px 0;         }          .footer {             margin-top: 30px;             text-align: center;             color: #666;             font-size: 14px;         }          @keyframes slideIn {             0% {                 opacity: 0;                 transform: translateY(50px) rotateX(-20deg);             }             100% {                 opacity: 1;                 transform: translateY(0) rotateX(0);             }         }          @keyframes flipIn {             0% {                 opacity: 0;                 transform: rotateY(90deg);             }             100% {                 opacity: 1;                 transform: rotateY(0);             }         }             .signup-link-container a, .criarconta-link-container a {     color: var(--secondary-color);     text-decoration: none;     font-weight: bold;     transition: color 0.3s ease; }       .signup-link-container a:hover, .criarconta-link-container a:hover {     color: var(--secondary-color); }     </style>       <script src="https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-app.js"></script>     <script src="https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-auth.js"></script>     <script src="https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/amoracoin-armz.js"></script>          <script src="https://amoracoin.netlify.app/amoracoinCloud/sys/amoracoinjs/cloud/Biblioteca/Amoracoin-3.0/Amoracoin.js"></script>    <div class="container">     <div id="signup-section1" style="display:none;">     <div class="section" id="signup-section">         <h2>Criar Conta</h2>         <div class="input-group">             <label for="signup-username">Nome de usuário</label>             <input type="text" id="signup-username" placeholder="Nome de usuário">         </div>         <div class="input-group">             <label for="signup-email">Email</label>             <input type="email" id="signup-email" placeholder="Email">         </div>         <div class="input-group">             <label for="signup-password">Senha</label>             <input type="password" id="signup-password" placeholder="Senha">         </div>         <input type="checkbox" id="show-password">         <label for="show-password">Mostrar senha</label>         <button onclick="createAccount()" class="button">Criar Conta</button>           <div class="criarconta-link-container"> <a href="#" onclick="toggleForms()">Já possui uma conta?</a>                                     <div class="footer">         &copy; 2024 Amoracoin. Todos os direitos reservados.     </div>                                           </div>                      </div>               </div>       <div id="login-section1">     <div class="section" id="login-section">         <h2>Entrar</h2>         <div class="input-group">             <label for="signin-email">Email</label>             <input type="email" id="signin-email" placeholder="Email">         </div>         <div class="input-group">             <label for="signin-password">Senha</label>             <input type="password" id="signin-password" placeholder="Senha">         </div>         <input type="checkbox" id="show-password2">         <label for="show-password2">Mostrar senha</label>         <button onclick="signIn()" class="button">Entrar</button>        <div class="signup-link-container"> <a href="#" onclick="toggleForms()">Não possui uma conta?</a>                                </div>              </div>      <div class="section main-section" id="main-section">         <h2>Minha Conta</h2>         <p id="saudacao-usuario"></p>         <p><span id="saldo"></span></p>         <p><span id="chave-transferencia"></span></p>     </div>  <div class="footer">         &copy; 2024 Amoracoin. Todos os direitos reservados.     </div>     </div>      <script>         Amoracoin.inicializar();  function toggleForms() {     const loginSection1 = document.getElementById('login-section1');     const signupSection1 = document.getElementById('signup-section1');     const mainSection = document.getElementById('main-section');      if (loginSection1.style.display === 'block' || signupSection1.style.display === 'none') {         loginSection1.style.display = 'none';         signupSection1.style.display = 'block';         mainSection.style.display = 'none';      } else {         loginSection1.style.display = 'block';         signupSection1.style.display = 'none';         mainSection.style.display = 'none';     } }  function createAccount() {     const email = document.getElementById('signup-email').value;     const senha = document.getElementById('signup-password').value;     const usuario = document.getElementById('signup-username').value;      Amoracoin.criarConta(email, senha, usuario)         .then(() => {                       Amoracoin.login(email, senha)                 .then(usuario => {                     if (usuario === undefined) {                                                 localStorage.removeItem('usuarioEmail');                         localStorage.removeItem('usuarioSenha');                         localStorage.removeItem('transferKey');                     } else {                                                 localStorage.setItem('usuarioEmail', email);                         localStorage.setItem('usuarioSenha', senha);                     }                 });                         console.log("Conta criada com sucesso.");             alert("Conta criada com sucesso!, Atualize a página");                                         toggleForms();         })         .catch(erro => {             console.error("Erro ao criar conta:", erro);             alert("Erro ao criar conta. Verifique o console para mais detalhes.");         }); }  function signIn() {     const email = document.getElementById('signin-email').value;     const senha = document.getElementById('signin-password').value;      Amoracoin.login(email, senha)         .then(usuario => {             if (usuario === undefined) {                                localStorage.removeItem('usuarioEmail');                 localStorage.removeItem('usuarioSenha');                 localStorage.removeItem('transferKey');                 alert("Erro ao fazer login: usuário indefinido.");                 return;             }                        localStorage.setItem('usuarioEmail', email);             localStorage.setItem('usuarioSenha', senha);              document.getElementById('signup-section').style.display = 'none';             document.getElementById('login-section').style.display = 'none';                        document.getElementById('main-section').style.display = 'block';                         Promise.all([                 Amoracoin.saldo(),                 Amoracoin.obterChave(),                 Amoracoin.obterNomeUsuario()             ]).then(([saldo, chaveTransferencia, nomeUsuario]) => {                                localStorage.setItem('transferKey', chaveTransferencia);                  const saldoElement = document.getElementById('saldo');                 if (saldoElement) {                     saldoElement.textContent = `Saldo: ${saldo}`;                 } else {                     console.error("Elemento saldo não encontrado.");                 }                  const chaveElement = document.getElementById('chave-transferencia');                 if (chaveElement) {                     chaveElement.textContent = `Chave de Transferência: ${chaveTransferencia}`;                 } else {                     console.error("Elemento chave de transferência não encontrado.");                 }                  const saudacaoElement = document.getElementById('saudacao-usuario');                 if (saudacaoElement) {                     saudacaoElement.textContent = `Olá, ${nomeUsuario}`;                 } else {                     console.error("Elemento de saudação não encontrado.");                 }             }).catch(erro => {                 console.error("Erro ao recuperar saldo, chave de transferência ou nome de usuário:", erro);                 alert("Erro ao recuperar informações do usuário");             });          })         .catch(erro => {             if (erro.code === 'user-not-found' || !erro.code) {                               localStorage.removeItem('usuarioEmail');                 localStorage.removeItem('usuarioSenha');                 localStorage.removeItem('transferKey');             }             const errorMessage = erro.message;             console.error("Erro ao fazer login:", errorMessage);             alert("Erro ao fazer login");         }); }  function checkSavedLogin() {         const savedEmail = localStorage.getItem('usuarioEmail');     const savedSenha = localStorage.getItem('usuarioSenha');      if (savedEmail && savedSenha) {                document.getElementById('signin-email').value = savedEmail;         document.getElementById('signin-password').value = savedSenha;                 signIn();     } }  function initApp() {       checkSavedLogin(); }  const passwordInput = document.getElementById('signup-password'); const showPasswordCheckbox = document.getElementById('show-password');  showPasswordCheckbox.addEventListener('change', function() {     if (showPasswordCheckbox.checked) {         passwordInput.type = 'text';     } else {         passwordInput.type = 'password';     } });  const passwordInput2 = document.getElementById('signin-password'); const showPasswordCheckbox2 = document.getElementById('show-password2');  showPasswordCheckbox2.addEventListener('change', function() {     if (showPasswordCheckbox2.checked) {         passwordInput2.type = 'text';     } else {         passwordInput2.type = 'password';     } });  function exibirSeçãoPrincipal(usuario) {     document.getElementById('signup-section').style.display = 'none';     document.getElementById('login-section').style.display = 'none';         document.getElementById('main-section').style.display = 'block';      const saudacaoElement = document.getElementById('saudacao-usuario');     if (saudacaoElement && usuario) {         saudacaoElement.textContent = `Olá, ${usuario.nome}`;     } else {         console.error("Elemento de saudação não encontrado ou usuário não está definido.");     } }  initApp();          </script> </body> </html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Título da página</title>
+</head>
+<body>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            --secondary-color: #c2185b;
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            animation: flipIn 0.5s ease;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(233, 30, 99, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .button {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .main-section {
+            display: none;
+        }
+
+        .main-section p {
+            margin: 10px 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-20deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        @keyframes flipIn {
+            0% {
+                opacity: 0;
+                transform: rotateY(90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0);
+            }
+        }
+        
+   .signup-link-container a,
+.criarconta-link-container a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}     
+
+.signup-link-container a:hover,
+.criarconta-link-container a:hover {
+    color: var(--secondary-color);
+}
+    </style>
+    <script src="https://amoracoin.vercel.app/amoracoinCloud/sys/amoracoinjs/cloud/Biblioteca/Amoracoin-5.0/Amoracoin.js"></script>
+
+   <div class="container">
+    <div id="signup-section1" style="display:none;">
+    <div class="section" id="signup-section">
+        <h2>Criar Conta</h2>
+        <div class="input-group">
+            <label for="signup-username">Nome de usuário</label>
+            <input type="text" id="signup-username" placeholder="Nome de usuário">
+        </div>
+        <div class="input-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="Email">
+        </div>
+        <div class="input-group">
+            <label for="signup-password">Senha</label>
+            <input type="password" id="signup-password" placeholder="Senha">
+        </div>
+        <input type="checkbox" id="show-password">
+        <label for="show-password">Mostrar senha</label>
+        <button onclick="createAccount()" class="button">Criar Conta</button>
+          <div class="criarconta-link-container"> <a href="#" onclick="toggleForms()">Já possui uma conta?</a>                 
+                   <div class="footer">
+        &copy; 2024 Amoracoin. Todos os direitos reservados.
+    </div>                          
+                </div>                
+     </div>          
+    </div>
+    
+ <div id="login-section1">
+    <div class="section" id="login-section">
+        <h2>Entrar</h2>
+        <div class="input-group">
+            <label for="signin-email">Email</label>
+            <input type="email" id="signin-email" placeholder="Email">
+        </div>
+        <div class="input-group">
+            <label for="signin-password">Senha</label>
+            <input type="password" id="signin-password" placeholder="Senha">
+        </div>
+        <input type="checkbox" id="show-password2">
+        <label for="show-password2">Mostrar senha</label>
+        <button onclick="signIn()" class="button">Entrar</button>
+       <div class="signup-link-container"> <a href="#" onclick="toggleForms()">Não possui uma conta?</a>               
+                </div>         
+    </div>
+
+    <div class="section main-section" id="main-section">
+        <h2>Minha Conta</h2>
+        <p id="saudacao-usuario"></p>
+        <p><span id="saldo"></span></p>
+        <p><span id="chave-transferencia"></span></p>
+    </div>
+ <div class="footer">
+        &copy; 2024 Amoracoin. Todos os direitos reservados.
+    </div>
+   
+</div>
+
+    <script>
+        Amoracoin.inicializar();
+
+function toggleForms() {
+    const loginSection1 = document.getElementById('login-section1');
+    const signupSection1 = document.getElementById('signup-section1');
+    const mainSection = document.getElementById('main-section');
+
+    if (loginSection1.style.display === 'block' || signupSection1.style.display === 'none') {
+        loginSection1.style.display = 'none';
+        signupSection1.style.display = 'block';
+        mainSection.style.display = 'none'; 
+    } else {
+        loginSection1.style.display = 'block';
+        signupSection1.style.display = 'none';
+        mainSection.style.display = 'none';
+    }
+}
+
+function createAccount() {
+    const email = document.getElementById('signup-email').value;
+    const senha = document.getElementById('signup-password').value;
+    const usuario = document.getElementById('signup-username').value;
+
+    Amoracoin.criarConta(email, senha, usuario)
+        .then(() => {          
+            Amoracoin.login(email, senha)
+                .then(usuario => {
+                    if (usuario === undefined) {                        
+                        localStorage.removeItem('usuarioEmail');
+                        localStorage.removeItem('usuarioSenha');
+                        localStorage.removeItem('transferKey');
+                    } else {                        
+                        localStorage.setItem('usuarioEmail', email);
+                        localStorage.setItem('usuarioSenha', senha);
+                    }
+                });
+           
+            console.log("Conta criada com sucesso.");
+            alert("Conta criada com sucesso!, Atualize a página");                            
+            toggleForms();
+        })
+        .catch(erro => {
+            console.error("Erro ao criar conta:", erro);
+            alert("Erro ao criar conta. Verifique o console para mais detalhes.");
+        });
+}
+
+function signIn() {
+    const email = document.getElementById('signin-email').value;
+    const senha = document.getElementById('signin-password').value;
+
+    Amoracoin.login(email, senha)
+        .then(usuario => {
+            if (usuario === undefined) {               
+                localStorage.removeItem('usuarioEmail');
+                localStorage.removeItem('usuarioSenha');
+                localStorage.removeItem('transferKey');
+                alert("Erro ao fazer login: usuário indefinido.");
+                return;
+            }
+          
+            localStorage.setItem('usuarioEmail', email);
+            localStorage.setItem('usuarioSenha', senha);
+
+            document.getElementById('signup-section').style.display = 'none';
+            document.getElementById('login-section').style.display = 'none';
+          
+            document.getElementById('main-section').style.display = 'block';
+           
+            Promise.all([
+                Amoracoin.saldo(),
+                Amoracoin.MinhaChave(),
+                Amoracoin.obterNomeUsuario()
+            ]).then(([saldo, chaveTransferencia, nomeUsuario]) => {               
+                localStorage.setItem('transferKey', chaveTransferencia);
+
+                const saldoElement = document.getElementById('saldo');
+                if (saldoElement) {
+                    saldoElement.textContent = `Saldo: ${saldo}`;
+                } else {
+                    console.error("Elemento saldo não encontrado.");
+                }
+
+                const chaveElement = document.getElementById('chave-transferencia');
+                if (chaveElement) {
+                    chaveElement.textContent = `Chave de Transferência: ${chaveTransferencia}`;
+                } else {
+                    console.error("Elemento chave de transferência não encontrado.");
+                }
+
+                const saudacaoElement = document.getElementById('saudacao-usuario');
+                if (saudacaoElement) {
+                    saudacaoElement.textContent = `Olá, ${nomeUsuario}`;
+                } else {
+                    console.error("Elemento de saudação não encontrado.");
+                }
+            }).catch(erro => {
+                console.error("Erro ao recuperar saldo, chave de transferência ou nome de usuário:", erro);
+                alert("Erro ao recuperar informações do usuário");
+            });
+
+        })
+        .catch(erro => {
+            if (erro.code === 'user-not-found' || !erro.code) {              
+                localStorage.removeItem('usuarioEmail');
+                localStorage.removeItem('usuarioSenha');
+                localStorage.removeItem('transferKey');
+            }
+            const errorMessage = erro.message;
+            console.error("Erro ao fazer login:", errorMessage);
+            alert("Erro ao fazer login");
+        });
+}
+
+function checkSavedLogin() {    
+    const savedEmail = localStorage.getItem('usuarioEmail');
+    const savedSenha = localStorage.getItem('usuarioSenha');
+
+    if (savedEmail && savedSenha) {       
+        document.getElementById('signin-email').value = savedEmail;
+        document.getElementById('signin-password').value = savedSenha;
+       
+        signIn();
+    }
+}
+
+function initApp() {  
+    checkSavedLogin();
+}
+
+const passwordInput = document.getElementById('signup-password');
+const showPasswordCheckbox = document.getElementById('show-password');
+
+showPasswordCheckbox.addEventListener('change', function() {
+    if (showPasswordCheckbox.checked) {
+        passwordInput.type = 'text';
+    } else {
+        passwordInput.type = 'password';
+    }
+});
+
+const passwordInput2 = document.getElementById('signin-password');
+const showPasswordCheckbox2 = document.getElementById('show-password2');
+
+showPasswordCheckbox2.addEventListener('change', function() {
+    if (showPasswordCheckbox2.checked) {
+        passwordInput2.type = 'text';
+    } else {
+        passwordInput2.type = 'password';
+    }
+});
+
+function exibirSeçãoPrincipal(usuario) {
+    document.getElementById('signup-section').style.display = 'none';
+    document.getElementById('login-section').style.display = 'none';
+   
+    document.getElementById('main-section').style.display = 'block';
+
+    const saudacaoElement = document.getElementById('saudacao-usuario');
+    if (saudacaoElement && usuario) {
+        saudacaoElement.textContent = `Olá, ${usuario.nome}`;
+    } else {
+        console.error("Elemento de saudação não encontrado ou usuário não está definido.");
+    }
+}
+
+initApp();
+    
+    </script>
+</body>
+</html>
