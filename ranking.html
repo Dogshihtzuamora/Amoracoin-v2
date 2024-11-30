@@ -58,104 +58,113 @@
 
     <script>
         const rankingElement = document.getElementById("ranking");
-        const loadingElement = document.getElementById("loading");
-        const errorElement = document.getElementById("error");
-        const searchInput = document.getElementById("searchInput");
+const loadingElement = document.getElementById("loading");
+const errorElement = document.getElementById("error");
+const searchInput = document.getElementById("searchInput");
 
-        function startLoading() {
-            loadingElement.classList.remove("hidden");
-            rankingElement.innerHTML = "";
-        }
+function startLoading() {
+    loadingElement.classList.remove("hidden");
+    rankingElement.innerHTML = "";
+}
 
-        function stopLoading() {
-            loadingElement.classList.add("hidden");
-        }
+function stopLoading() {
+    loadingElement.classList.add("hidden");
+}
 
-        function showError() {
-            errorElement.classList.remove("hidden");
+function showError() {
+    errorElement.classList.remove("hidden");
+    stopLoading();
+}
+
+Amoracoin.inicializar();
+
+function carregarRanking() {
+    startLoading();
+
+    Amoracoin.UsersAmoracoin()
+        .then(usuarios => {
             stopLoading();
-        }
-
-        Amoracoin.inicializar();
-        
-        function carregarRanking() {
-            startLoading();
-
-            Amoracoin.UsersAmoracoin()
-                .then(usuarios => {
-                    stopLoading();
-                    const listaUsuarios = usuarios.split(",");
-                    
-                    listaUsuarios.forEach((usuario, index) => {
-                        const item = document.createElement("li");
-                        item.className = `
-                            bg-white border rounded-lg p-3 
-                            flex items-center justify-between
-                            shadow-sm transition 
-                            hover:shadow-md 
-                            hover:bg-indigo-50
-                            usuario-item
-                        `;
-                        
-                        const infoContainer = document.createElement("div");
-                        infoContainer.className = "flex items-center";
-
-                        const posicao = document.createElement("span");
-                        posicao.className = "mr-4 font-bold text-indigo-600 text-lg posicao-numero";
-                        posicao.textContent = `#${index + 1}`;
-                        
-                        const nome = document.createElement("span");
-                        nome.textContent = usuario.trim();
-                        nome.className = "text-gray-800 usuario-nome";
-
-                        const logo = document.createElement("img");
-                        logo.src = "https://amoracoin.vercel.app/amoracoin-icon.png";
-                        logo.alt = "Logo Amoracoin";
-                        logo.className = "w-10 h-10 ml-4 rounded-full";
-
-                        infoContainer.appendChild(posicao);
-                        infoContainer.appendChild(nome);
-                        item.appendChild(infoContainer);
-                        item.appendChild(logo);
-                        rankingElement.appendChild(item);
-                    });
-
-                    configurarPesquisa();
-                })
-                .catch(error => {
-                    console.error("Erro ao obter usuários:", error);
-                    showError();
-                });
-        }
-
-        function configurarPesquisa() {
-            searchInput.addEventListener('input', function() {
-                const termoPesquisa = this.value.toLowerCase().trim();
-                const itensRanking = document.querySelectorAll('.usuario-item');
+                     
+            let listaUsuarios = [];
+            if (typeof usuarios === 'string') {
+                listaUsuarios = usuarios.split(",");
+            } else if (Array.isArray(usuarios)) {
+                listaUsuarios = usuarios;
+            } else if (typeof usuarios === 'object') {                
+                listaUsuarios = Object.values(usuarios);
+            } else {
+                throw new Error("Unexpected data format for usuarios");
+            }
+            
+            listaUsuarios.forEach((usuario, index) => {
+                const item = document.createElement("li");
+                item.className = `
+                    bg-white border rounded-lg p-3 
+                    flex items-center justify-between
+                    shadow-sm transition 
+                    hover:shadow-md 
+                    hover:bg-indigo-50
+                    usuario-item
+                `;
                 
-                itensRanking.forEach(item => {
-                    const nomeUsuario = item.querySelector('.usuario-nome').textContent.toLowerCase();
-                    const posicaoNumero = item.querySelector('.posicao-numero').textContent;
-                                  
-                    if (termoPesquisa.startsWith('#')) {                       
-                        if (posicaoNumero.includes(termoPesquisa)) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    } else {
-                       
-                        if (nomeUsuario.includes(termoPesquisa)) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    }
-                });
-            });
-        }
+                const infoContainer = document.createElement("div");
+                infoContainer.className = "flex items-center";
 
-        carregarRanking();
+                const posicao = document.createElement("span");
+                posicao.className = "mr-4 font-bold text-indigo-600 text-lg posicao-numero";
+                posicao.textContent = `#${index + 1}`;
+                
+                const nome = document.createElement("span");
+                nome.textContent = String(usuario).trim(); 
+                nome.className = "text-gray-800 usuario-nome";
+
+                const logo = document.createElement("img");
+                logo.src = "https://amoracoin.vercel.app/amoracoin-icon.png";
+                logo.alt = "Logo Amoracoin";
+                logo.className = "w-10 h-10 ml-4 rounded-full";
+
+                infoContainer.appendChild(posicao);
+                infoContainer.appendChild(nome);
+                item.appendChild(infoContainer);
+                item.appendChild(logo);
+                rankingElement.appendChild(item);
+            });
+
+            configurarPesquisa();
+        })
+        .catch(error => {
+            console.error("Erro ao obter usuários:", error);
+            showError();
+        });
+}
+
+function configurarPesquisa() {
+    searchInput.addEventListener('input', function() {
+        const termoPesquisa = this.value.toLowerCase().trim();
+        const itensRanking = document.querySelectorAll('.usuario-item');
+        
+        itensRanking.forEach(item => {
+            const nomeUsuario = item.querySelector('.usuario-nome').textContent.toLowerCase();
+            const posicaoNumero = item.querySelector('.posicao-numero').textContent;
+            
+            if (termoPesquisa.startsWith('#')) {
+                if (posicaoNumero.includes(termoPesquisa)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            } else {
+                if (nomeUsuario.includes(termoPesquisa)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    });
+}
+
+carregarRanking();
     </script>
 </body>
-</html>
+    </html>
