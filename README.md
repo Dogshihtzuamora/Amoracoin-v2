@@ -1,24 +1,25 @@
 # Amoracoin
 
-## Sobre o Amoracoin
+## About Amoracoin
 
-Amoracoin (AMCR) é uma moeda digital, desenvolvida por Ravy Novais Sales em 24/12/2023. Ela é projetada para facilitar trocas online sem depender de dinheiro convencional. A AMCR adota uma abordagem única, não baseada em blockchain, diferenciando-se de muitas criptomoedas. O símbolo da moeda é AMCR.
+Amoracoin (AMCR) is a digital cryptocurrency, developed by Ravy Novais Sales on December 24, 2023. It is designed to facilitate online exchanges without relying on conventional money. The symbol of the coin is AMCR. As an API, Amoracoin can be easily integrated into various projects, expanding its use cases.
 
-## História
+## History
 
-Ravy Novais Sales deu vida à Amoracoin em 24 de dezembro de 2023, mas teve diversas versões.
-## Missão
+Ravy Novais Sales brought Amoracoin to life on December 24, 2023, but it has undergone several versions.
 
-Eliminar a dependência do dinheiro físico e abrir as portas para transações online sem barreiras.
+## Mission
 
-## Principais características
+To eliminate dependence on physical money and open the doors to online transactions without barriers.
 
-- Abordagem não baseada em blockchain
-- Facilitação de trocas online
-- Alternativa ao dinheiro convencional
+## Key Features
 
-## Sobre Ravy Novais Sales
+- Facilitation of online exchanges
+- Alternative to conventional money
+- Can be implemented in various projects as an API
 
-Ravy Novais Sales é um programador. Alguns de seus notáveis incluem a criação da Amoracoin, o desenvolvimento do MelScript e RuskDrive,o Websfctype, o RuskChat, o ProtCode, a Rusktech, o Rmusc, o RuskQr Code, o IABOT-02, o LuRa-editor, o PIDMH, o RuskCalc e o Rmaps. Ele também fundou a Nova.is Tech, uma equipe especializada em criação de inteligência artificial e no desenvolvimento de ideias para o futuro.
+## About Ravy Novais Sales
 
-Também conhecido pelos Pseudónimo "agente37000y" ou "agente37".
+Ravy Novais Sales is a programmer. Some of his notable creations include Amoracoin, MelScript, RuskDrive, Websfctype, RuskChat, ProtCode, Rusktech, Rmusc, RuskQr Code, IABOT-02, LuRa-editor, PIDMH, RuskCalc, and Rmaps. He also founded Nova.is Tech, a team specialized in creating artificial intelligence and developing ideas for the future.
+
+He is also known by the pseudonyms "agente37000y" or "agente37".
