@@ -263,7 +263,7 @@
 
             async function loadWallets() {
                 try {
-                    const response = await fetch('wallets.json');
+                    const response = await fetch('Wallet/wallets.json');
                     if (!response.ok) {
                         throw new Error('Erro ao carregar o arquivo wallets.json');
                     }
