@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://amoracoin.netlify.app/amoracoin-icon.png" type="image/png">
+    <meta property="og:title" content="Amoracoin">
+    <meta property="og:description" content="Amoracoin (AMCR) é uma moeda digital, desenvolvida por Ravy Novais Sales em 2023.">
+    <meta name="theme-color" content="#ff407e">
+    <meta name="keywords" content="criptomoeda, finanças, transações, amoracoin, cryptocurrency">
+    <meta name="author" content="Amoracoin">
+    <title>Amoracoin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary: #ff407e;
+            --primary-dark: #e01e63;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --gray: #f5f5f5;
+            --dark-gray: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 36px;
+        }
+        
+        .language-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn.active {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+        
+        .lang-btn:hover:not(.active) {
+            background-color: rgba(255, 64, 126, 0.1);
+        }
+        
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+            color: var(--light);
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .cta-section {
+            background-color: var(--gray);
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+               
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://amoracoin.netlify.app/amoracoin-icon.png" alt="Amoracoin">
+                    Amoracoin
+                </a>
+                <div class="language-switch">
+                    <button class="lang-btn active" data-lang="pt">PT</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </header>
+   
+    <div id="pt-content" class="lang-content active">
+        <section class="hero">
+            <div class="container">
+                <h1>Amoracoin (AMCR)</h1>
+                <p>Uma criptomoeda digital desenvolvida para facilitar trocas online sem depender de dinheiro convencional. Criada por Ravy Novais Sales em dezembro de 2023.</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Nossa Missão</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 18px;">
+                Eliminar a dependência do dinheiro físico e abrir as portas para transações online sem barreiras.
+            </p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Facilita Trocas Online</h3>
+                    <p>Realize transações digitais de forma rápida, segura e sem complicações.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Alternativa Digital</h3>
+                    <p>Uma alternativa moderna ao dinheiro convencional para a era digital.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>API Versátil</h3>
+                    <p>Pode ser facilmente implementada em diversos projetos como API.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div id="en-content" class="lang-content">
+        <section class="hero">
+            <div class="container">
+                <h1>Amoracoin (AMCR)</h1>
+                <p>A digital cryptocurrency developed to facilitate online exchanges without relying on conventional money. Created by Ravy Novais Sales in December 2023.</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Our Mission</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 18px;">
+                To eliminate dependence on physical money and open the doors to barrier-free online transactions.
+            </p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Facilitates Online Exchanges</h3>
+                    <p>Conduct digital transactions quickly, securely, and without complications.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Digital Alternative</h3>
+                    <p>A modern alternative to conventional money for the digital age.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Versatile API</h3>
+                    <p>Can be easily implemented in various projects as an API.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="copyright" id="copyright-pt">&copy; 2024 Amoracoin. Todos os direitos reservados.</p>
+                <p class="copyright" id="copyright-en" style="display: none;">&copy; 2024 Amoracoin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const ptContent = document.getElementById('pt-content');
+        const enContent = document.getElementById('en-content');
+        const copyrightPt = document.getElementById('copyright-pt');
+        const copyrightEn = document.getElementById('copyright-en');
+        
+        langButtons.forEach(button => {
+            button.addEventListener('click', function() {               
+                langButtons.forEach(btn => btn.classList.remove('active'));
+                               
+                this.classList.add('active');
+                                
+                const lang = this.getAttribute('data-lang');
+                
+                if (lang === 'pt') {
+                    ptContent.classList.add('active');
+                    enContent.classList.remove('active');
+                    copyrightPt.style.display = 'block';
+                    copyrightEn.style.display = 'none';
+                    document.documentElement.lang = 'pt';
+                } else {
+                    enContent.classList.add('active');
+                    ptContent.classList.remove('active');
+                    copyrightPt.style.display = 'none';
+                    copyrightEn.style.display = 'block';
+                    document.documentElement.lang = 'en';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
