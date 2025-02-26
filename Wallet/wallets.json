@@ -1,0 +1,14 @@
+[
+  {
+    "foto": "caminho/para/imagem1.jpg",
+    "nome": "Nome da Carteira 1",
+    "descricao": "Descrição detalhada da carteira 1...",
+    "link": "https://link-para-carteira1.com"
+  },
+  {
+    "foto": "caminho/para/imagem2.jpg",
+    "nome": "Nome da Carteira 2",
+    "descricao": "Descrição detalhada da carteira 2...",
+    "link": "https://link-para-carteira2.com"
+  }
+]
