@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Amoracoin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #7C3AED;
+            --primary-light: #8B5CF6;
+            --primary-dark: #6D28D9;
+            --secondary: #8B5CF6;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --text: #1F2937;
+            --text-light: #4B5563;
+            --success: #48bb78;
+            --background: #F9FAFB;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        h1 i {
+            margin-right: 10px;
+        }
+        
+        .blocks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .block {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .block-header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .block-id {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .block-id i {
+            margin-right: 8px;
+        }
+        
+        .block-timestamp {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            text-align: right;
+        }
+        
+        .block-content {
+            padding: 15px;
+        }
+        
+        .transaction-info {
+            margin-bottom: 12px;
+        }
+        
+        .transaction-label {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+        }
+        
+        .transaction-value {
+            font-weight: 500;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+        
+        .amount {
+            color: var(--success);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #718096;
+        }
+        
+        @media (max-width: 768px) {
+            .blocks-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-link"></i> Rede Amoracoin</h1>
+    </header>
+    
+    <div id="blocks-container" class="blocks-container">
+        <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i> Carregando transações...
+        </div>
+    </div>
+
+    <script src="https://amoracoin.vercel.app/Src/Amoracoin lib/1.0.js"></script>
+    <script>
+        function loadTransactions() {
+                      var transactions = Amoracoin.Transactions();            
+          
+            var blocksContainer = document.getElementById('blocks-container');
+            blocksContainer.innerHTML = ''; 
+            if (!transactions || transactions.length === 0) {
+                blocksContainer.innerHTML = '<div class="loading">Nenhuma transação encontrada</div>';
+                return;
+            }
+                         transactions.forEach(function(transaction) {
+                var block = document.createElement('div');
+                block.className = 'block';
+                                
+                var timestamp = transaction.timestamp || 'N/A';
+                var formattedDate = timestamp;
+                
+                try {
+                    if (timestamp !== 'N/A') {
+                        var date = new Date(timestamp);
+                        formattedDate = date.toLocaleString('pt-BR');
+                    }
+                } catch (e) {
+                    console.log('Erro ao formatar data:', e);
+                    formattedDate = timestamp;
+                }
+                               
+                block.innerHTML = `
+                    <div class="block-header">
+                        <div class="block-id">
+                            <i class="fas fa-cube"></i> Bloco #${transaction.id || 'N/A'}
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <div class="transaction-info">
+                            <div class="transaction-label">De:</div>
+                            <div class="transaction-value">${transaction.from || 'N/A'}</div>
+                        </div>
+                        <div class="transaction-info">
+                            <div class="transaction-label">Para:</div>
+                            <div class="transaction-value">${transaction.to || 'N/A'}</div>
+                        </div>
+                        <div class="transaction-info">
+                            <div class="transaction-label">Valor:</div>
+                            <div class="transaction-value amount">${transaction.amount || 'N/A'} AMCR</div>
+                        </div>
+                        <div class="block-timestamp">
+                            ${formattedDate}
+                        </div>
+                    </div>
+                `;
+                
+                blocksContainer.appendChild(block);
+            });
+        }
+                        document.addEventListener('DOMContentLoaded', function() {
+            loadTransactions();
+            
+           
+            setInterval(loadTransactions, 5000);
+        });
+    </script>
+</body>
+</html>
