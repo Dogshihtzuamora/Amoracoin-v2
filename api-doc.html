@@ -162,7 +162,24 @@
     </style>
 </head>
 <body>
-    <div id="container">
+    
+    <div id="container">       
+<select id="languageSelector">
+    <option value="pt">Português</option>
+    <option value="en">English</option>
+</select>
+
+<script>
+    document.getElementById('languageSelector').addEventListener('change', function() {
+        const selectedLanguage = this.value;
+        
+        if (selectedLanguage === 'en') {        
+            window.location.href = 'api-doc-en.html'; 
+        } else if (selectedLanguage === 'pt') {           
+            window.location.href = 'api-doc.html';
+        }
+    });
+</script>
         <h1>Documentação da API - Amoracoin</h1>
         <p>Bem-vindo à documentação da API para a criação e consulta de carteiras da <strong>Amoracoin</strong>.</p>
         
@@ -262,6 +279,8 @@
     <p><strong>Endpoint:</strong></p>
     <code><a href="https://amoracoin-serve.vercel.app/mine" class="link" target="_blank">https://amoracoin-serve.vercel.app/mine</a></code>
     <p><strong>Total de Amoracoins:</strong> <span id="total-coins">Carregando...</span></p>
+    
+    
 
     <script>
         fetch("https://amoracoin-serve.vercel.app/mine")
@@ -292,4 +311,3 @@ function searchDocs() {
 
 
 
-  
