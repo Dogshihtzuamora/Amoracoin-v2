@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteira Amoracoin</title>
+    <script src="https://amoracoin.vercel.app/Src/Amoracoin lib/1.0.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #logs {
+            border: 1px solid #000;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        .transfer-section {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .transaction-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        .transaction-type {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .sent {
+            color: #d9534f;
+        }
+        .received {
+            color: #5cb85c;
+        }
+        .transaction-date {
+            color: #777;
+            font-size: 0.9em;
+        }
+        .transaction-id {
+            font-size: 0.8em;
+            color: #777;
+            word-break: break-all;
+        }
+        .transaction-amount {
+            font-weight: bold;
+        }
+        .refresh-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        #transactionsList {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Carteira Amoracoin</h1>
+
+    <div class="section">
+        <button id="btnCriar" onclick="criarCarteira()">Criar Carteira</button>
+        <button onclick="excluirCarteira()">Excluir Carteira</button>
+        <button onclick="mign()">Minerar</button>
+    </div>
+
+    <div class="section">
+        <h2>Dados da Carteira</h2>
+        <pre id="dadosCarteira">Nenhuma carteira encontrada.</pre>
+    </div>
+
+    <div class="section transfer-section">
+        <h2>Transferir Amoracoin</h2>
+        <div>
+            <label for="destinationAddress">Endereço de Destino:</label>
+            <input type="text" id="destinationAddress" size="40">
+        </div>
+        <div style="margin-top: 10px;">
+            <label for="amount">Quantidade:</label>
+            <input type="number" id="amount" min="0.00001" step="0.00001" value="0.00001">
+            <button onclick="transferir()">Transferir</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Minhas Transações <button class="refresh-btn" onclick="carregarTransacoes()">🔄</button></h2>
+        <div id="transactionsList"></div>
+    </div>
+
+    <div class="section">
+        <h2>Logs</h2>
+        <div id="logs"></div>
+    </div>
+
+    <script>
+        function log(message) {
+            var logContainer = document.getElementById('logs');
+            var logEntry = document.createElement('div');
+            logEntry.textContent = new Date().toLocaleTimeString() + ": " + message;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        function atualizarCarteira() {
+            var carteira = Amoracoin.FindWallet();
+            if (carteira) {
+                document.getElementById('dadosCarteira').innerText = JSON.stringify(carteira, null, 2);
+                localStorage.setItem('carteiraCriada', 'true');
+                document.getElementById('btnCriar').style.display = 'none';
+                                
+                carregarTransacoes();
+            } else {
+                document.getElementById('dadosCarteira').innerText = "Nenhuma carteira encontrada.";
+                document.getElementById('btnCriar').style.display = 'block';
+                document.getElementById('transactionsList').innerHTML = "<p>Crie uma carteira para ver suas transações.</p>";
+            }
+        }
+
+        function criarCarteira() {
+            if (localStorage.getItem('carteiraCriada') === 'true') return;
+            var carteira = Amoracoin.CreateWallet();
+            if (carteira) {
+                log("Carteira criada com sucesso!");
+                atualizarCarteira();
+            } else {
+                log("Erro ao criar carteira.");
+            }
+        }
+
+        function excluirCarteira() {
+            var carteira = Amoracoin.FindWallet();
+            if (carteira) {
+                var confirmacao = confirm("Tem certeza que deseja excluir sua carteira?");
+                if (confirmacao) {
+                    var resultado = Amoracoin.DeleteWallet(carteira.privateKey);
+                    if (resultado === true) {
+                        log("Carteira excluída com sucesso!");
+                        localStorage.removeItem('carteiraCriada');
+                        atualizarCarteira();
+                    } else {
+                        log("Erro ao excluir carteira: " + resultado);
+                    }
+                }
+            } else {
+                log("Nenhuma carteira encontrada para excluir.");
+            }
+        }
+
+        function minerar() {
+            var carteira = Amoracoin.FindWallet();
+            if (carteira) {
+                var resultado = Amoracoin.Mine(carteira.privateKey);
+                if (resultado.success) {
+                    log("Mineração bem-sucedida! Novo saldo: " + resultado.newBalance);
+                    atualizarCarteira();
+                } else {
+                    log("Erro na mineração: " + resultado.message);
+                }
+            } else {
+                log("Crie uma carteira antes de minerar.");
+            }
+        }
+
+        function mign() {
+            let count = 0;
+            let interval = setInterval(() => {
+                count++;
+                minerar();
+                log(`Minerando... (${count})`);
+                if (count >= 30) {
+                    clearInterval(interval);
+                    log("Mineração automática concluída!");
+                }
+            }, 1000);
+        }
+
+        function transferir() {
+            var carteira = Amoracoin.FindWallet();
+            if (!carteira) {
+                log("Crie uma carteira antes de transferir.");
+                return;
+            }
+
+            var destinationAddress = document.getElementById('destinationAddress').value;
+            var amount = document.getElementById('amount').value;
+
+            if (!destinationAddress) {
+                log("Por favor, insira um endereço de destino.");
+                return;
+            }
+
+            if (!amount || amount <= 0) {
+                log("Por favor, insira uma quantidade válida.");
+                return;
+            }
+
+            log(`Iniciando transferência de ${amount} Amoracoin para ${destinationAddress}...`);
+            
+            try {
+                var resultado = Amoracoin.Transfer(carteira.privateKey, destinationAddress, amount);
+                
+                if (Array.isArray(resultado)) {                    
+                    var ultimaTransacao = resultado[resultado.length - 1];
+                    log(`Transferência realizada com sucesso!`);
+                    log(`Detalhes: Valor: ${ultimaTransacao.amount}, Taxa: ${ultimaTransacao.fee}, ID: ${ultimaTransacao.id}`);
+                    atualizarCarteira();
+                } else if (resultado && typeof resultado === 'object') {                  
+                    if (resultado.success === false) {
+                        log(`Erro na transferência: ${resultado.message || "Erro desconhecido"}`);
+                    } else if (resultado.amount !== undefined) {
+                        log(`Transferência realizada com sucesso! Valor: ${resultado.amount}`);
+                        atualizarCarteira();
+                    } else {                       
+                        log("Transferência processada. Verifique seu saldo.");
+                        log("Resposta: " + JSON.stringify(resultado));
+                        atualizarCarteira();
+                    }
+                } else {
+                    log("Transferência processada. Verifique seu saldo.");
+                    atualizarCarteira();
+                }
+            } catch (error) {
+                log(`Erro ao processar a transferência: ${error.message}`);
+            }
+        }
+
+        function carregarTransacoes() {
+            var carteira = Amoracoin.FindWallet();
+            if (!carteira) {
+                log("Crie uma carteira antes de verificar transações.");
+                return;
+            }
+            
+            try {
+                var endereco = carteira.address;
+                var todasTransacoes = Amoracoin.Transactions();
+                
+                if (!Array.isArray(todasTransacoes)) {
+                    log("Erro ao buscar transações. Formato inesperado de resposta.");
+                    return;
+                }
+                                 
+                var minhasTransacoes = todasTransacoes.filter(function(tx) {
+                    return tx.from === endereco || tx.to === endereco;
+                });
+                               
+                minhasTransacoes.sort(function(a, b) {
+                    return new Date(b.timestamp) - new Date(a.timestamp);
+                });
+                
+                exibirTransacoes(minhasTransacoes, endereco);
+                log(`Carregadas ${minhasTransacoes.length} transações.`);
+            } catch (error) {
+                log(`Erro ao carregar transações: ${error.message}`);
+            }
+        }
+        
+        function exibirTransacoes(transacoes, meuEndereco) {
+            var transacoesContainer = document.getElementById('transactionsList');
+            transacoesContainer.innerHTML = '';
+            
+            if (transacoes.length === 0) {
+                transacoesContainer.innerHTML = "<p>Nenhuma transação encontrada.</p>";
+                return;
+            }
+            
+            transacoes.forEach(function(tx) {
+                var transacaoElement = document.createElement('div');
+                transacaoElement.className = 'transaction-item';
+                
+                var tipoTransacao = tx.from === meuEndereco ? 'sent' : 'received';
+                var outroEndereco = tx.from === meuEndereco ? tx.to : tx.from;
+                var dataFormatada = new Date(tx.timestamp).toLocaleString();
+                
+                transacaoElement.innerHTML = `
+                    <div>
+                        <span class="transaction-type ${tipoTransacao}">${tipoTransacao === 'sent' ? 'Enviado' : 'Recebido'}</span>
+                        <span class="transaction-date">${dataFormatada}</span>
+                    </div>
+                    <div class="transaction-amount">${tx.amount} Amoracoin ${tx.fee ? '(Taxa: ' + tx.fee + ')' : ''}</div>
+                    <div class="transaction-address">${tipoTransacao === 'sent' ? 'Para: ' : 'De: '} ${outroEndereco.substring(0, 10)}...${outroEndereco.substring(outroEndereco.length - 10)}</div>
+                    <div class="transaction-id">ID: ${tx.id}</div>
+                `;
+                
+                transacoesContainer.appendChild(transacaoElement);
+            });
+        }
+       
+        atualizarCarteira();
+    </script>
+
+</body>
+</html>
