@@ -9,7 +9,7 @@
     "foto":"https://amoracoin.netlify.app/amoracoin-icon.png",
     "nome":"AmoraWallet",
     "descricao":"A simple wallet but with features such as: mining, transferring, viewing transactions, creating a wallet",
-    "link":"AmoraWallet.html"
+    "link":"Wallet/AmoraWallet.html"
   }
   
 ]
