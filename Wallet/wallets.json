@@ -1,5 +1,11 @@
 [
   {
+    "foto":"https://amorix.vercel.app/logo.jpg",
+    "nome":"Amorix",
+    "descricao":"Uma carteira avançada, com sisitetema de mineração, transferência, conta, e uma interface bonita.",
+    "link":"https://amorix.vercel.app/"
+  },
+  {
     "foto": "https://amoracoin.netlify.app/amoracoin-icon.png",
     "nome": "NetAmoracoin",
     "descricao": "a network to view transactions ",
