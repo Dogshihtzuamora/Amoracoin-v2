@@ -280,7 +280,20 @@
     <code><a href="https://amoracoin-serve.vercel.app/mine" class="link" target="_blank">https://amoracoin-serve.vercel.app/mine</a></code>
     <p><strong>Total Amoracoins:</strong> <span id="total-coins">Loading...</span></p>
 
-    <div class="api-section">
+    
+    
+    <script>
+        fetch("https://amoracoin-serve.vercel.app/mine")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("total-coins").textContent = data.amoracoins || "Error loading";
+            })
+            .catch(error => {
+                document.getElementById("total-coins").textContent = "Error loading";
+            });
+    </script>
+</div>
+        <div class="api-section">
     <h2>8. Wallet Backup and Restoration</h2>
     <p>To ensure the integrity of your wallet, you can create a backup and restore it later. The backup process temporarily removes the wallet from the network, and you can reintroduce it to the network when necessary.</p>
     
@@ -303,19 +316,7 @@
     <div class="important">
         <p><strong>Important:</strong> Restoring a wallet may overwrite any changes made after the backup. Make sure the restoration is necessary before proceeding.</p>
     </div>
-    </div>
-    
-    <script>
-        fetch("https://amoracoin-serve.vercel.app/mine")
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("total-coins").textContent = data.amoracoins || "Error loading";
-            })
-            .catch(error => {
-                document.getElementById("total-coins").textContent = "Error loading";
-            });
-    </script>
-</div>
+        </div>
     </div>
     
     <script>
