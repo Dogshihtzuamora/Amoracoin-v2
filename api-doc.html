@@ -280,7 +280,30 @@
     <code><a href="https://amoracoin-serve.vercel.app/mine" class="link" target="_blank">https://amoracoin-serve.vercel.app/mine</a></code>
     <p><strong>Total de Amoracoins:</strong> <span id="total-coins">Carregando...</span></p>
     
+    <div class="api-section">
+    <h2>8. Backup e Restauração de Carteira</h2>
+    <p>Para garantir a integridade da sua carteira, é possível realizar o backup e restaurá-la posteriormente. O processo de backup retira a carteira da rede, e você pode recolocá-la na rede quando necessário.</p>
     
+    <h3>Fazer Backup de uma Carteira</h3>
+    <p>Para realizar o backup de uma carteira, basta acessar o seguinte endpoint, substituindo <code>${chavePrivada}</code> pela chave privada da sua carteira:</p>
+    <p><strong>Endpoint:</strong></p>
+    <code><a href="https://amoracoin-serve.vercel.app/backup?key_private=${chavePrivada}" class="link" target="_blank">https://amoracoin-serve.vercel.app/backup?key_private=${chavePrivada}</a></code>
+    <p>Este endpoint irá gerar o backup da carteira, removendo-a temporariamente da rede. Você pode usar este backup para restaurá-la posteriormente.</p>
+    
+    <h3>Restaurar uma Carteira</h3>
+    <p>Para restaurar a carteira, utilize o seguinte endpoint, passando o conteúdo do backup na URL:</p>
+    <p><strong>Endpoint:</strong></p>
+    <code><a href="https://amoracoin-serve.vercel.app/backup?restore=${conteúdo}" class="link" target="_blank">https://amoracoin-serve.vercel.app/backup?restore=${conteúdo}</a></code>
+    <p>Substitua <code>${conteúdo}</code> pelo conteúdo do seu backup. A restauração irá recolocar a carteira na rede, permitindo que você acesse seus fundos novamente.</p>
+
+    <div class="note">
+        <p><strong>Nota:</strong> O backup retira a carteira da rede temporariamente. Certifique-se de manter o backup seguro para evitar qualquer perda de dados importantes.</p>
+    </div>
+
+    <div class="important">
+        <p><strong>Importante:</strong> A restauração de uma carteira pode sobrescrever qualquer alteração feita após o backup. Certifique-se de que a restauração é necessária antes de prosseguir.</p>
+    </div>
+    </div>
 
     <script>
         fetch("https://amoracoin-serve.vercel.app/mine")
