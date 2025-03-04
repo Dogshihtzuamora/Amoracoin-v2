@@ -279,6 +279,31 @@
     <p><strong>Endpoint:</strong></p>
     <code><a href="https://amoracoin-serve.vercel.app/mine" class="link" target="_blank">https://amoracoin-serve.vercel.app/mine</a></code>
     <p><strong>Total Amoracoins:</strong> <span id="total-coins">Loading...</span></p>
+
+    <div class="api-section">
+    <h2>8. Wallet Backup and Restoration</h2>
+    <p>To ensure the integrity of your wallet, you can create a backup and restore it later. The backup process temporarily removes the wallet from the network, and you can reintroduce it to the network when necessary.</p>
+    
+    <h3>Create a Wallet Backup</h3>
+    <p>To create a backup of your wallet, simply access the following endpoint, replacing <code>${privateKey}</code> with your wallet's private key:</p>
+    <p><strong>Endpoint:</strong></p>
+    <code><a href="https://amoracoin-serve.vercel.app/backup?key_private=${privateKey}" class="link" target="_blank">https://amoracoin-serve.vercel.app/backup?key_private=${privateKey}</a></code>
+    <p>This endpoint will generate a backup of the wallet, temporarily removing it from the network. You can use this backup to restore the wallet later.</p>
+    
+    <h3>Restore a Wallet</h3>
+    <p>To restore the wallet, use the following endpoint, passing the backup content in the URL:</p>
+    <p><strong>Endpoint:</strong></p>
+    <code><a href="https://amoracoin-serve.vercel.app/backup?restore=${content}" class="link" target="_blank">https://amoracoin-serve.vercel.app/backup?restore=${content}</a></code>
+    <p>Replace <code>${content}</code> with your backup content. The restoration will reintroduce the wallet to the network, allowing you to access your funds again.</p>
+
+    <div class="note">
+        <p><strong>Note:</strong> The backup temporarily removes the wallet from the network. Make sure to keep the backup secure to prevent any loss of important data.</p>
+    </div>
+
+    <div class="important">
+        <p><strong>Important:</strong> Restoring a wallet may overwrite any changes made after the backup. Make sure the restoration is necessary before proceeding.</p>
+    </div>
+    </div>
     
     <script>
         fetch("https://amoracoin-serve.vercel.app/mine")
