@@ -280,6 +280,21 @@
     <code><a href="https://amoracoin-serve.vercel.app/mine" class="link" target="_blank">https://amoracoin-serve.vercel.app/mine</a></code>
     <p><strong>Total de Amoracoins:</strong> <span id="total-coins">Carregando...</span></p>
     
+    
+    </div>
+
+    <script>
+        fetch("https://amoracoin-serve.vercel.app/mine")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("total-coins").textContent = data.amoracoins || "Erro ao carregar";
+            })
+            .catch(error => {
+                document.getElementById("total-coins").textContent = "Erro ao carregar";
+            });
+    </script>
+</div>
+
     <div class="api-section">
     <h2>8. Backup e Restauração de Carteira</h2>
     <p>Para garantir a integridade da sua carteira, é possível realizar o backup e restaurá-la posteriormente. O processo de backup retira a carteira da rede, e você pode recolocá-la na rede quando necessário.</p>
@@ -303,19 +318,6 @@
     <div class="important">
         <p><strong>Importante:</strong> A restauração de uma carteira pode sobrescrever qualquer alteração feita após o backup. Certifique-se de que a restauração é necessária antes de prosseguir.</p>
     </div>
-    </div>
-
-    <script>
-        fetch("https://amoracoin-serve.vercel.app/mine")
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("total-coins").textContent = data.amoracoins || "Erro ao carregar";
-            })
-            .catch(error => {
-                document.getElementById("total-coins").textContent = "Erro ao carregar";
-            });
-    </script>
-</div>
     </div>
     
     <script>
