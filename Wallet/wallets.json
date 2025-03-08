@@ -12,6 +12,12 @@
     "link": "Wallet/netAmoracoin.html"
   },
   {
+    "foto": "https://amoracoin.netlify.app/amoracoin-icon.png",
+    "nome": "AmoMine",
+    "descricao": "a network to view transactions ",
+    "link": "Wallet/netAmoracoin.html"
+  },
+  {
     "foto":"https://amoracoin.netlify.app/amoracoin-icon.png",
     "nome":"AmoraWallet",
     "descricao":"A simple wallet but with features such as: mining, transferring, viewing transactions, creating a wallet",
