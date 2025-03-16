@@ -5,6 +5,12 @@
     "descricao":"Uma carteira avançada, com sisitetema de mineração, transferência, conta, e uma interface bonita.",
     "link":"https://amorix.vercel.app/"
   },
+ {
+    "foto":"https://amorix.vercel.app/logo.jpg",
+    "nome":"AmoraRC",
+    "descricao":"Uma carteira avançada, com sisitetema de mineração, transferência, conta, e uma interface bonita.",
+    "link":"https://amorarc.vercel.app/"
+  }, 
   {
     "foto":"https://i.ibb.co/v4xnWxD0/481eec623dee.jpg",
     "nome":"Amoracoin v6",
