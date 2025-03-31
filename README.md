@@ -2,7 +2,7 @@
 
 ## About Amoracoin
 
-Amoracoin (AMCR) is a digital cryptocurrency, developed by Ravy Novais Sales on December 24, 2023. It is designed to facilitate online exchanges without relying on conventional money. The symbol of the coin is AMCR. As an API, Amoracoin can be easily integrated into various projects, expanding its use cases.
+Amoracoin (AMCR) is a digital cryptocurrency, developed by Ravy NS on December 24, 2023. It is designed to facilitate online exchanges without relying on conventional money. The symbol of the coin is AMCR. As an API, Amoracoin can be easily integrated into various projects, expanding its use cases.
 
 ## History
 
