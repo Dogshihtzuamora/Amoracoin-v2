@@ -6,7 +6,7 @@ Amoracoin (AMCR) is a digital cryptocurrency, developed by Ravy NS on December 2
 
 ## History
 
-Ravy Novais Sales brought Amoracoin to life on December 24, 2023, but it has undergone several versions.
+Ravy NS brought Amoracoin to life on December 24, 2023, but it has undergone several versions.
 
 ## Mission
 
@@ -18,8 +18,8 @@ To eliminate dependence on physical money and open the doors to online transacti
 - Alternative to conventional money
 - Can be implemented in various projects as an API
 
-## About Ravy Novais Sales
+## About Ravy NS
 
-Ravy Novais Sales is a programmer. Some of his notable creations include Amoracoin, MelScript, RuskDrive, Websfctype, RuskChat, ProtCode, Rusktech, Rmusc, RuskQr Code, IABOT-02, LuRa-editor, PIDMH, RuskCalc, and Rmaps. He also founded Nova.is Tech, a team specialized in creating artificial intelligence and developing ideas for the future.
+Ravy NS is a programmer. Some of his notable creations include Amoracoin, MelScript, RuskDrive, Websfctype, RuskChat, ProtCode, Rusktech, Rmusc, RuskQr Code, IABOT-02, LuRa-editor, PIDMH, RuskCalc, and Rmaps. He also founded Nova.is Tech, a team specialized in creating artificial intelligence and developing ideas for the future.
 
 He is also known by the pseudonyms "agente37000y" or "agente37".
